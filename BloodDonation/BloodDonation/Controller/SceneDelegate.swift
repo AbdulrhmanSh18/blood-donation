@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  blood-donation
+//  BloodDonation
 //
-//  Created by Abdulrhman Abuhyyh on 19/05/1443 AH.
+//  Created by Abdulrhman Abuhyyh on 23/05/1443 AH.
 //
 
 import UIKit

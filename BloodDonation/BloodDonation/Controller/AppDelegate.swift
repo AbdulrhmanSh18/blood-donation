@@ -1,12 +1,12 @@
 //
 //  AppDelegate.swift
-//  blood-donation
+//  BloodDonation
 //
-//  Created by Abdulrhman Abuhyyh on 19/05/1443 AH.
+//  Created by Abdulrhman Abuhyyh on 23/05/1443 AH.
 //
 
 import UIKit
-
+import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
         return true
     }
 
