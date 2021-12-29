@@ -10,7 +10,7 @@ import Firebase
 class PostViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
-  
+    
     @IBOutlet weak var dateTextFieldPost: UITextField!
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
@@ -35,10 +35,7 @@ class PostViewController: UIViewController {
         }else {
             actionButtonAdd.setTitle("Add Post", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
-            
         }
-        
-        
     }
     @objc func handleDelete (_ sender: UIBarButtonItem) {
         let ref = Firestore.firestore().collection("posts")
@@ -70,6 +67,7 @@ class PostViewController: UIViewController {
            let location = locationTextFieldPost.text,
            let currentUser = Auth.auth().currentUser {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
+            //            ref.addDocument(data:)
             var postId = ""
             if let selectedPost = selectedPost {
                 postId = selectedPost.id
@@ -82,18 +80,20 @@ class PostViewController: UIViewController {
             storageRef.putData(imageData, metadata: updloadMeta) { storageMeta, error in
                 if let error = error {
                     print("Upload error",error.localizedDescription)
+                }
                 storageRef.downloadURL { url, error in
                     var postData = [String:Any]()
                     if let url = url {
                         let db = Firestore.firestore()
                         let ref = db.collection("posts")
                         if let selectedPost = self.selectedPost {
-                            postData = [ "userId":selectedPost.user.id,
-                                         "date":date,
-                                         "location":location,
-                                         "imageUrl":url.absoluteString,
-                                         "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
-                                         "updatedAt": FieldValue.serverTimestamp()
+                            postData = [
+                                "userId":selectedPost.user.id,
+                                "date":date,
+                                "location":location,
+                                "imageUrl":url.absoluteString,
+                                "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
+                                "updatedAt": FieldValue.serverTimestamp()
                             ]
                         }else {
                             postData = [
@@ -117,41 +117,41 @@ class PostViewController: UIViewController {
         }
     }
 }
-    extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        @objc func chooseImage() {
-            self.showAlert()
-        }
-        private func showAlert() {
-            
-            let alert = UIAlertController(title: "Choose Profile Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
-                self.getImage(fromSourceType: .camera)
-            }))
-            alert.addAction(UIAlertAction(title: "Photo Album", style: .default, handler: {(action: UIAlertAction) in
-                self.getImage(fromSourceType: .photoLibrary)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        //get image from source type
-        private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
-            
-            //Check is source type available
-            if UIImagePickerController.isSourceTypeAvailable(sourceType) {
-                
-                let imagePickerController = UIImagePickerController()
-                imagePickerController.delegate = self
-                imagePickerController.sourceType = sourceType
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
-        }
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-            postImageView.image = chosenImage
-            dismiss(animated: true, completion: nil)
-        }
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true, completion: nil)
-        }
-        
+extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func chooseImage() {
+        self.showAlert()
     }
+    private func showAlert() {
+        
+        let alert = UIAlertController(title: "Choose Profile Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
+            self.getImage(fromSourceType: .camera)
+        }))
+        alert.addAction(UIAlertAction(title: "Photo Album", style: .default, handler: {(action: UIAlertAction) in
+            self.getImage(fromSourceType: .photoLibrary)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    //get image from source type
+    private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
+        
+        //Check is source type available
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = sourceType
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        postImageView.image = chosenImage
+        dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+}

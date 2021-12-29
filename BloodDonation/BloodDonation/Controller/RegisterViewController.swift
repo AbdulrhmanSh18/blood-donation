@@ -15,7 +15,7 @@ let imagePickerController = UIImagePickerController()
         didSet {
             userRegisterImageView.layer.borderColor = UIColor.systemRed.cgColor
             userRegisterImageView.layer.borderWidth = 3.0
-            userRegisterImageView.bounds.height/2
+            userRegisterImageView.layer.cornerRadius = userRegisterImageView.bounds.height / 2
             userRegisterImageView.layer.masksToBounds = true
             userRegisterImageView.isUserInteractionEnabled = true
             let tabGesture = UITapGestureRecognizer(target: self, action: #selector(selectImage))
@@ -72,7 +72,11 @@ let imagePickerController = UIImagePickerController()
                                         "id":authResult.user.uid,
                                         "name":userName,
                                         "email":email,
-                                        "imageUrl":url.absoluteString
+                                        "imageUrl":url.absoluteString,
+                                        "type of blood":typeOfBlood,
+                                        "age":age,
+                                        "phone":phone
+                                        
                                     ]
                                     db.collection("users").document(authResult.user.uid)
                                         .setData(userData) { error in
@@ -107,7 +111,7 @@ extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationCo
         let galeryAction = UIAlertAction(title: "Photh Album", style: .default) { Action in
             self.getImage(from: .photoLibrary)
         }
-        let dismissAction = UIAlertAction(title: "Cancle", style: .default)
+        let dismissAction = UIAlertAction(title: "Cancle", style: .destructive)
         { Action in
             self.dismiss(animated: true, completion: nil)
         }

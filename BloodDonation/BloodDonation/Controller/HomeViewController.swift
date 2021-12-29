@@ -78,7 +78,8 @@ class HomeViewController: UIViewController {
         do {
             try Auth.auth().signOut()
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingNavigationController") as? UINavigationController {
-                vc.present(vc, animated: true, completion: nil)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
             }
         }catch {
             print("ERROR in signout", error.localizedDescription)
