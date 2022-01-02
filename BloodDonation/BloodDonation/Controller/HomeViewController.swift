@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     }
     func getPosts() {
         let ref = Firestore.firestore()
-        ref.collection("posts").order(by: "cratedAtt",descending: true).addSnapshotListener { snapshot, error in
+        ref.collection("posts").order(by: "createdAt",descending: true).addSnapshotListener { snapshot, error in
             if let error = error {
                 print("DB ERROR Posts",error.localizedDescription)
             }
@@ -34,15 +34,15 @@ class HomeViewController: UIViewController {
                     switch diff.type {
                     case .added :
                         if let userId = post["userId"] as? String {
-                            ref.collection("users").document(userId).getDocument {
-                                userSnapshot, error in
+                            ref.collection("users").document(userId).getDocument { userSnapshot, error in
                                 if let error = error {
-                                    print("Error User Data",error.localizedDescription)
+                                    print("ERROR user Data",error.localizedDescription)
+                                    
                                 }
                                 if let userSnapshot = userSnapshot,
                                    let userData = userSnapshot.data(){
                                     let user = User(dict:userData)
-                                    let post = Post(dict: post, id: diff.document.documentID,user:user)
+                                    let post = Post(dict:post,id:diff.document.documentID,user:user)
                                     self.posts.insert(post, at: 0)
                                     DispatchQueue.main.async {
                                         self.postTabelViewHome.reloadData()
@@ -97,19 +97,18 @@ class HomeViewController: UIViewController {
                 vc.selectedPostImage = selectedPostImage
             }
         }
-}
+    }
 }
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell") as!
-        PostCell
-        return cell.configure(with : posts[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath) as! PostCell
+        return cell.configure(with: posts[indexPath.row])
     }
 }
-
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200

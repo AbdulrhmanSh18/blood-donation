@@ -12,16 +12,17 @@ class DetailsViewController: UIViewController {
     var selectedPostImage:UIImage?
     @IBOutlet weak var dateLabelDetails: UILabel!
     @IBOutlet weak var locationLabelDetails: UILabel!
-    
     @IBOutlet weak var notLabelDetails: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let selectedPost = selectedPost,
-               let selectedImage = selectedPostImage {
-                   dateLabelDetails.text = selectedPost.title
-                   locationLabelDetails.text = selectedPost.description
-                   notLabelDetails.text = selectedPost.nottt
+        if let selectedPost = selectedPost {
+                   dateLabelDetails.text = selectedPost.date
+                   locationLabelDetails.text = selectedPost.location
+                   notLabelDetails.text = selectedPost.note
+            
+            
+            
                }
     }
 }

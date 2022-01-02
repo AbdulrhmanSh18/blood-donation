@@ -9,7 +9,7 @@ import UIKit
 let imageCache = NSCache<NSString,UIImage>()
 extension UIImageView {
     func circlerImage () {
-        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.cornerRadius = self.frame.height/2
         self.layer.masksToBounds = true
     }
     func loadImageUsingCache (with urlString:String) {

@@ -14,21 +14,32 @@ class PostViewController: UIViewController {
     @IBOutlet weak var dateTextFieldPost: UITextField!
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
-    @IBOutlet weak var switchQuetion1: UISwitch!
-    @IBOutlet weak var switchQuetion2: UISwitch!
-    @IBOutlet weak var switchQuetion3: UISwitch!
-    @IBOutlet weak var switchQuetion4: UISwitch!
+    //    @IBOutlet weak var switchQuetion1: UISwitch!
+    //    @IBOutlet weak var switchQuetion2: UISwitch!
+    //    @IBOutlet weak var switchQuetion3: UISwitch!
+    //    @IBOutlet weak var switchQuetion4: UISwitch!
     @IBOutlet weak var actionButtonAdd: UIButton!
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var newimagePost: UIImageView! {
+        didSet {
+            
+            newimagePost.layer.borderColor = UIColor.systemRed.cgColor
+            newimagePost.layer.borderWidth = 3.0
+            newimagePost.layer.cornerRadius = newimagePost.bounds.height / 2
+            newimagePost.layer.masksToBounds = true
+            newimagePost.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
+            newimagePost.addGestureRecognizer(tapGesture)
+        }
+    }
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         if let selectedPost = selectedPost ,
            let selectedImage = selectedPostImage {
-            dateTextFieldPost.text = selectedPost.title
-            locationTextFieldPost.text = selectedPost.description
-            noteTextFieldPost.text = selectedPost.nottt
-            postImageView.image = selectedImage
+            dateTextFieldPost.text = selectedPost.date
+            locationTextFieldPost.text = selectedPost.location
+            noteTextFieldPost.text = selectedPost.note
+            newimagePost.image = selectedImage
             actionButtonAdd.setTitle("Update Post", for: .normal)
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
@@ -61,10 +72,11 @@ class PostViewController: UIViewController {
     
     @IBAction func handlingAddQ(_ sender: Any) {
         
-        if let image = postImageView.image,
+        if let image = newimagePost.image,
            let imageData = image.jpegData(compressionQuality: 0.25),
            let date = dateTextFieldPost.text,
            let location = locationTextFieldPost.text,
+           let note = noteTextFieldPost.text,
            let currentUser = Auth.auth().currentUser {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
             //            ref.addDocument(data:)
@@ -91,6 +103,7 @@ class PostViewController: UIViewController {
                                 "userId":selectedPost.user.id,
                                 "date":date,
                                 "location":location,
+                                "note":note,
                                 "imageUrl":url.absoluteString,
                                 "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
                                 "updatedAt": FieldValue.serverTimestamp()
@@ -99,8 +112,11 @@ class PostViewController: UIViewController {
                             postData = [
                                 "userId":currentUser.uid,
                                 "date":date,
-                                "location":url.absoluteString,
-                                "createdAt":FieldValue.serverTimestamp()
+                                "location":location,
+                                "note":note,
+                                "imageUrl":url.absoluteString,
+                                "createdAt":FieldValue.serverTimestamp(),
+                                "updatedAt": FieldValue.serverTimestamp()
                             ]
                         }
                         ref.document(postId).setData(postData) {
@@ -147,7 +163,7 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        postImageView.image = chosenImage
+        newimagePost.image = chosenImage
         dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

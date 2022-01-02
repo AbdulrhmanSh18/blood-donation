@@ -9,20 +9,22 @@ import Foundation
 import Firebase
 struct Post {
     var id = ""
-    var title = ""
-    var description = ""
+    var date = ""
+    var location = ""
+    var note = ""
     var imageUrl = ""
     var user:User
-    var nottt = ""
     var createdAt:Timestamp?
     
     init(dict:[String:Any],id:String,user:User) {
-        if let title = dict["title"] as? String,
-           let description = dict["description"] as? String,
+        if let date = dict["date"] as? String,
+           let location = dict["location"] as? String,
+           let note = dict["note"] as? String,
            let imageUrl = dict["imageUrl"] as? String,
             let createdAt = dict["createdAt"] as? Timestamp{
-            self.title = title
-            self.description = description
+            self.date = date
+            self.location = location
+            self.note = note
             self.imageUrl = imageUrl
             self.createdAt = createdAt
         }

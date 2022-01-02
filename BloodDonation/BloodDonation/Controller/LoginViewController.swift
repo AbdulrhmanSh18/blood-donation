@@ -12,8 +12,6 @@ class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var emailTextFieldLogin: UITextField!
     @IBOutlet weak var passwordTextFieldLogin: UITextField!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

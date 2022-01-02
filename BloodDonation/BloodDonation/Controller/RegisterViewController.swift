@@ -7,14 +7,14 @@
 
 import UIKit
 import Firebase
-import SwiftUI
+
 class RegisterViewController: UIViewController {
-let imagePickerController = UIImagePickerController()
+    let imagePickerController = UIImagePickerController()
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var userRegisterImageView: UIImageView! {
         didSet {
             userRegisterImageView.layer.borderColor = UIColor.systemRed.cgColor
-            userRegisterImageView.layer.borderWidth = 3.0
+            userRegisterImageView.layer.borderWidth = 6.0
             userRegisterImageView.layer.cornerRadius = userRegisterImageView.bounds.height / 2
             userRegisterImageView.layer.masksToBounds = true
             userRegisterImageView.isUserInteractionEnabled = true
@@ -22,7 +22,7 @@ let imagePickerController = UIImagePickerController()
             userRegisterImageView.addGestureRecognizer(tabGesture)
         }
     }
-
+    
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var typeOfBloodTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -47,50 +47,49 @@ let imagePickerController = UIImagePickerController()
            let password = passwordTextField.text,
            let confrimPassword = confrimPasswordTextField.text,
            password == confrimPassword {
-            Activity.showIndicator(parentView: self.view, childView: activityIndicator)
-            Auth.auth().createUser(withEmail: email, password: password){
-                authResult , error in
+            
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let error = error {
                     print("Registration Auth Error",error.localizedDescription)
                 }
                 if let authResult = authResult {
-                        let storageRef = Storage.storage().reference(withPath: "users/\(authResult.user.uid)")
-                        let uploadMeta = StorageMetadata.init()
-                        uploadMeta.contentType = "image/jpeg"
-                        storageRef.putData(imageData,metadata: uploadMeta){
-                            storageMeta,error in if let error = error {
-                                print("Registration Storage Error",error.localizedDescription)
+                    let storageRef = Storage.storage().reference(withPath: "users/\(authResult.user.uid)")
+                    let uploadMeta = StorageMetadata.init()
+                    uploadMeta.contentType = "image/jpeg"
+                    storageRef.putData(imageData,metadata: uploadMeta) {
+                        storageMeta,error in
+                        if let error = error {
+                            print("Registration Storage Error",error.localizedDescription)
+                        }
+                        storageRef.downloadURL { url, error in
+                            if let error = error {
+                                print("Registration Storage Download Url Error",error.localizedDescription)
                             }
-                            storageRef.downloadURL { url, error in
-                                if let error = error {
-                                    print("Registration Storage Download Url Error",error.localizedDescription)
-                                }
-                                if let url = url {
-                                    print("URL",url.absoluteString)
-                                    let db = Firestore.firestore()
-                                    let userData :[String:String] = [
-                                        "id":authResult.user.uid,
-                                        "name":userName,
-                                        "email":email,
-                                        "imageUrl":url.absoluteString,
-                                        "type of blood":typeOfBlood,
-                                        "age":age,
-                                        "phone":phone
-                                        
-                                    ]
-                                    db.collection("users").document(authResult.user.uid)
-                                        .setData(userData) { error in
-                                            if let error = error {
-                                                print("Registration Database error",error.localizedDescription)
+                            if let url = url {
+                                print("URL",url.absoluteString)
+                                let db = Firestore.firestore()
+                                let userData :[String:String] = [
+                                    "id":authResult.user.uid,
+                                    "userName":userName,
+                                    "email":email,
+                                    "typeOfBlood":typeOfBlood,
+                                    "age":age,
+                                    "phone":phone,
+                                    "imageUrl":url.absoluteString
+                                ]
+                                db.collection("users").document(authResult.user.uid)
+                                    .setData(userData) { error in
+                                        if let error = error {
+                                            print("Registration Database error",error.localizedDescription)
+                                            
+                                        }else {
+                                            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController {
+                                                vc.modalPresentationStyle = .fullScreen
                                                 
-                                            }else {
-                                                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController {
-                                                    vc.modalPresentationStyle = .fullScreen
-                                                    Activity.removeIndicator(parentView:self.view, childView: self.activityIndicator)
-                                                    self.present(vc, animated: true, completion: nil)
-                                                }
-                                }
-                                }
+                                                self.present(vc, animated: true, completion: nil)
+                                            }
+                                        }
+                                    }
                             }
                         }
                     }
@@ -111,30 +110,29 @@ extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationCo
         let galeryAction = UIAlertAction(title: "Photh Album", style: .default) { Action in
             self.getImage(from: .photoLibrary)
         }
-        let dismissAction = UIAlertAction(title: "Cancle", style: .destructive)
-        { Action in
+        let dismissAction = UIAlertAction(title: "Cancle", style: .destructive) { Action in
             self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cameraAction)
         alert.addAction(galeryAction)
         alert.addAction(dismissAction)
         self.present(alert, animated: true, completion: nil)
-        }
+    }
     func getImage(from sourceType: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             imagePickerController.sourceType = sourceType
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
-        func imagePickerController(_ picker:UIImagePickerController ,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return
-                
-            }
-            userRegisterImageView.image = chosenImage
-            dismiss(animated: true, completion: nil)
+    func imagePickerController(_ picker:UIImagePickerController ,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return
+            
         }
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true, completion: nil)
-        }
+        userRegisterImageView.image = chosenImage
+        dismiss(animated: true, completion: nil)
     }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 
