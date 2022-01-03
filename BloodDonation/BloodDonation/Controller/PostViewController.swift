@@ -12,6 +12,7 @@ class PostViewController: UIViewController {
     var selectedPostImage:UIImage?
     
     @IBOutlet weak var dateTextFieldPost: UITextField!
+    let datePicker = UIDatePicker()
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
     //    @IBOutlet weak var switchQuetion1: UISwitch!
@@ -34,6 +35,8 @@ class PostViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        createDatePicker()
+        
         if let selectedPost = selectedPost ,
            let selectedImage = selectedPostImage {
             dateTextFieldPost.text = selectedPost.date
@@ -41,7 +44,7 @@ class PostViewController: UIViewController {
             noteTextFieldPost.text = selectedPost.note
             newimagePost.image = selectedImage
             actionButtonAdd.setTitle("Update Post", for: .normal)
-            let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash fill"),style: .plain, target: self, action: #selector(handleDelete))
+            let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
         }else {
             actionButtonAdd.setTitle("Add Post", for: .normal)
@@ -161,6 +164,24 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
+    func createDatePicker(){
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneButoon], animated: true)
+        dateTextFieldPost.inputAccessoryView = toolbar
+        dateTextFieldPost.inputView = datePicker
+        datePicker.datePickerMode = .date
+    }
+    @objc func donePressed(){
+    let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        dateTextFieldPost.text = formatter.string(from: datePicker.date)
+//        dateTextFieldPost.text = "\(datePicker.date)"
+        self.view.endEditing(true)
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         newimagePost.image = chosenImage
@@ -168,6 +189,6 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+        
     }
-    
 }
