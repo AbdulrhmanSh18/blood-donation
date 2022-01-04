@@ -11,14 +11,33 @@ class PostViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
     
+   
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateTextFieldPost: UITextField!
-    let datePicker = UIDatePicker()
+//    let datePicker = UIDatePicker()
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
-    //    @IBOutlet weak var switchQuetion1: UISwitch!
-    //    @IBOutlet weak var switchQuetion2: UISwitch!
-    //    @IBOutlet weak var switchQuetion3: UISwitch!
-    //    @IBOutlet weak var switchQuetion4: UISwitch!
+    
+        @IBOutlet weak var switchQuetion1: UISwitch!{
+        didSet {
+            switchQuetion1.isOn = false
+        }
+    }
+        @IBOutlet weak var switchQuetion2: UISwitch!{
+    didSet {
+        switchQuetion2.isOn = false
+    }
+}
+        @IBOutlet weak var switchQuetion3: UISwitch!{
+            didSet {
+                switchQuetion3.isOn = false
+            }
+        }
+        @IBOutlet weak var switchQuetion4: UISwitch!{
+            didSet {
+                switchQuetion4.isOn = false
+            }
+        }
     @IBOutlet weak var actionButtonAdd: UIButton!
     @IBOutlet weak var newimagePost: UIImageView! {
         didSet {
@@ -35,7 +54,9 @@ class PostViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        createDatePicker()
+        
+//        createDatePicker()n
+
         
         if let selectedPost = selectedPost ,
            let selectedImage = selectedPostImage {
@@ -51,6 +72,37 @@ class PostViewController: UIViewController {
             self.navigationItem.rightBarButtonItem = nil
         }
     }
+    @IBAction func switchActionOne(_ sender: Any) {
+        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
+            actionButtonAdd.isEnabled = false
+        } else {
+            actionButtonAdd.isEnabled = true
+        }
+    }
+    
+    @IBAction func switchAction2(_ sender: Any) {
+        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
+            actionButtonAdd.isEnabled = false
+        } else {
+            actionButtonAdd.isEnabled = true
+        }
+    }
+    @IBAction func switchAction3(_ sender: Any) {
+        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
+            actionButtonAdd.isEnabled = false
+        } else {
+            actionButtonAdd.isEnabled = true
+        }
+    }
+    
+    @IBAction func switchAction4(_ sender: Any) {
+        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
+            actionButtonAdd.isEnabled = false
+        } else {
+            actionButtonAdd.isEnabled = true
+        }
+    }
+    
     @objc func handleDelete (_ sender: UIBarButtonItem) {
         let ref = Firestore.firestore().collection("posts")
         if let selectedPost = selectedPost {
@@ -142,7 +194,7 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     private func showAlert() {
         
-        let alert = UIAlertController(title: "Choose Profile Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Choose Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
             self.getImage(fromSourceType: .camera)
         }))
@@ -164,24 +216,24 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
-    func createDatePicker(){
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        toolbar.setItems([doneButoon], animated: true)
-        dateTextFieldPost.inputAccessoryView = toolbar
-        dateTextFieldPost.inputView = datePicker
-        datePicker.datePickerMode = .date
-    }
-    @objc func donePressed(){
-    let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        dateTextFieldPost.text = formatter.string(from: datePicker.date)
-//        dateTextFieldPost.text = "\(datePicker.date)"
-        self.view.endEditing(true)
-    }
+//    func createDatePicker(){
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//
+//        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+//        toolbar.setItems([doneButoon], animated: true)
+//        dateTextFieldPost.inputAccessoryView = toolbar
+//        dateTextFieldPost.inputView = datePicker
+//        datePicker.datePickerMode = .date
+//    }
+//    @objc func donePressed(){
+//    let formatter = DateFormatter()
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .none
+//        dateTextFieldPost.text = formatter.string(from: datePicker.date)
+////        dateTextFieldPost.text = "\(datePicker.date)"
+//        self.view.endEditing(true)
+//    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         newimagePost.image = chosenImage

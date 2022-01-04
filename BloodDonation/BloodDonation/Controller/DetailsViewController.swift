@@ -13,16 +13,27 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var dateLabelDetails: UILabel!
     @IBOutlet weak var locationLabelDetails: UILabel!
     @IBOutlet weak var notLabelDetails: UILabel!
+    @IBOutlet weak var userNamelabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!{
+        didSet {
+            userImageView.layer.borderColor = UIColor.systemRed.cgColor
+            userImageView.layer.borderWidth = 0.1
+            userImageView.layer.cornerRadius = userImageView.bounds.height / 0
+            userImageView.layer.masksToBounds = true
+            userImageView.isUserInteractionEnabled = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let selectedPost = selectedPost {
-                   dateLabelDetails.text = selectedPost.date
-                   locationLabelDetails.text = selectedPost.location
-                   notLabelDetails.text = selectedPost.note
-            
-            
-            
+        if let selectedPost = selectedPost,
+        let selectedImage = selectedPostImage {
+                   dateLabelDetails.text = "The date donation at '  \(selectedPost.date) ' "
+                   locationLabelDetails.text = "The location ' \(selectedPost.location) ' "
+                   notLabelDetails.text = "Note about donation ' \(selectedPost.note)' "
+            userNamelabel.text = " Doner /   \(selectedPost.user.userName)"
+            userImageView.image = selectedImage
+   
                }
     }
 }
