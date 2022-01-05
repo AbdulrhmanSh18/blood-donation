@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA1D54872784D91900CE02C6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D54862784D91900CE02C6 /* ProfileViewController.swift */; };
+		BA1D548927862B7400CE02C6 /* helping.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D548827862B7400CE02C6 /* helping.swift */; };
 		BA686A282779927900D4D200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A272779927900D4D200 /* AppDelegate.swift */; };
 		BA686A2A2779927900D4D200 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A292779927900D4D200 /* SceneDelegate.swift */; };
 		BA686A2F2779927900D4D200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA686A2D2779927900D4D200 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA1D54862784D91900CE02C6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BA1D548827862B7400CE02C6 /* helping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helping.swift; sourceTree = "<group>"; };
 		BA686A242779927900D4D200 /* BloodDonation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloodDonation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA686A272779927900D4D200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA686A292779927900D4D200 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 			children = (
 				BA686A582779B87200D4D200 /* ImageView.swift */,
 				BA686A5A2779B89100D4D200 /* Activity.swift */,
+				BA1D548827862B7400CE02C6 /* helping.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 		BA686A472779B65200D4D200 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BA1D54862784D91900CE02C6 /* ProfileViewController.swift */,
 				BA686A482779B68900D4D200 /* LandingViewController.swift */,
 				BA686A4A2779B6A200D4D200 /* RegisterViewController.swift */,
 				BA686A4C2779B6B500D4D200 /* LoginViewController.swift */,
@@ -221,7 +227,9 @@
 				BA686A282779927900D4D200 /* AppDelegate.swift in Sources */,
 				BA686A492779B68900D4D200 /* LandingViewController.swift in Sources */,
 				BA686A5D2779B8F300D4D200 /* PostCell.swift in Sources */,
+				BA1D548927862B7400CE02C6 /* helping.swift in Sources */,
 				BA686A512779B75000D4D200 /* PostViewController.swift in Sources */,
+				BA1D54872784D91900CE02C6 /* ProfileViewController.swift in Sources */,
 				BA686A532779B78600D4D200 /* DetailsViewController.swift in Sources */,
 				BA686A592779B87200D4D200 /* ImageView.swift in Sources */,
 				BA686A2A2779927900D4D200 /* SceneDelegate.swift in Sources */,

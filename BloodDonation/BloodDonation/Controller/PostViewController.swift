@@ -12,13 +12,15 @@ class PostViewController: UIViewController {
     var selectedPostImage:UIImage?
     
    
+   
     @IBOutlet weak var datePicker: UIDatePicker!
+
     @IBOutlet weak var dateTextFieldPost: UITextField!
-//    let datePicker = UIDatePicker()
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
     
-        @IBOutlet weak var switchQuetion1: UISwitch!{
+    @IBOutlet weak var donateTimesPost: UITextField!
+    @IBOutlet weak var switchQuetion1: UISwitch!{
         didSet {
             switchQuetion1.isOn = false
         }
@@ -55,7 +57,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        createDatePicker()n
+//        createDatePicker()
 
         
         if let selectedPost = selectedPost ,
@@ -63,14 +65,29 @@ class PostViewController: UIViewController {
             dateTextFieldPost.text = selectedPost.date
             locationTextFieldPost.text = selectedPost.location
             noteTextFieldPost.text = selectedPost.note
+            donateTimesPost.text = selectedPost.donate
             newimagePost.image = selectedImage
             actionButtonAdd.setTitle("Update Post", for: .normal)
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
+            // delete butten
+            let deleteButton = UIButton(frame: CGRect(x: 80, y: 650, width: 250, height: 50))
+            deleteButton.setTitle("Delete", for: .normal)
+            self.navigationItem.rightBarButtonItem = deleteBarButton
+            deleteButton.backgroundColor = .systemGray4
+            
+            deleteButton.setTitleColor(UIColor.black, for: .normal)
+            deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+            self.view.addSubview(deleteButton)
+
         }else {
-            actionButtonAdd.setTitle("Add Post", for: .normal)
+            actionButtonAdd.setTitle("Add", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
         }
+    }
+    @IBAction func dateChange(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+     
     }
     @IBAction func switchActionOne(_ sender: Any) {
         if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
@@ -126,15 +143,25 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func handlingAddQ(_ sender: Any) {
+        let formatter = DateFormatter()
+        let locale = Locale(identifier: "en_US_POSIX")
+            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.dateStyle = DateFormatter.Style.medium
+            formatter.locale = locale
+            formatter.dateFormat = "yyyy-MM-dd"
+        let date = datePicker.date
         
+        let dateString = formatter.string(from: date)
+
         if let image = newimagePost.image,
            let imageData = image.jpegData(compressionQuality: 0.25),
-           let date = dateTextFieldPost.text,
+//           let date = dateTextFieldPost.text,
            let location = locationTextFieldPost.text,
            let note = noteTextFieldPost.text,
+           let donate = donateTimesPost.text,
            let currentUser = Auth.auth().currentUser {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
-            //            ref.addDocument(data:)
+//                        ref.addDocument(data:)
             var postId = ""
             if let selectedPost = selectedPost {
                 postId = selectedPost.id
@@ -156,9 +183,10 @@ class PostViewController: UIViewController {
                         if let selectedPost = self.selectedPost {
                             postData = [
                                 "userId":selectedPost.user.id,
-                                "date":date,
+                                "date":dateString,
                                 "location":location,
                                 "note":note,
+                                "donate":donate,
                                 "imageUrl":url.absoluteString,
                                 "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
                                 "updatedAt": FieldValue.serverTimestamp()
@@ -166,9 +194,10 @@ class PostViewController: UIViewController {
                         }else {
                             postData = [
                                 "userId":currentUser.uid,
-                                "date":date,
+                                "date":dateString,
                                 "location":location,
                                 "note":note,
+                                "donate":donate,
                                 "imageUrl":url.absoluteString,
                                 "createdAt":FieldValue.serverTimestamp(),
                                 "updatedAt": FieldValue.serverTimestamp()
@@ -223,15 +252,16 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
 //        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
 //        toolbar.setItems([doneButoon], animated: true)
 //        dateTextFieldPost.inputAccessoryView = toolbar
-//        dateTextFieldPost.inputView = datePicker
+//        dateTextFieldPost.inputView = dateText
 //        datePicker.datePickerMode = .date
+//
 //    }
 //    @objc func donePressed(){
 //    let formatter = DateFormatter()
 //        formatter.dateStyle = .medium
-//        formatter.timeStyle = .none
+////        formatter.timeStyle = .none
 //        dateTextFieldPost.text = formatter.string(from: datePicker.date)
-////        dateTextFieldPost.text = "\(datePicker.date)"
+//        dateTextFieldPost.text = "\(datePicker.date)"
 //        self.view.endEditing(true)
 //    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

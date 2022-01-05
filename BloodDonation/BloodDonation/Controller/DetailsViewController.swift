@@ -33,7 +33,8 @@ class DetailsViewController: UIViewController {
                    notLabelDetails.text = "Note about donation ' \(selectedPost.note)' "
             userNamelabel.text = " Doner /   \(selectedPost.user.userName)"
             userImageView.image = selectedImage
-   
+
+            
                }
     }
 }
