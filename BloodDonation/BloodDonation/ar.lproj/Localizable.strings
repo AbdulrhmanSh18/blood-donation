@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  BloodDonation
+
+  Created by Abdulrhman Abuhyyh on 03/06/1443 AH.
+  
+*/
+
+"bloodDonation" = "التبرع بالدم";
+"login" = "تسجيل دخول";
+"register" = "تسجيل جديد";
+"singIn" = "تسجيل";
+"userName" = "اسم المستخدم";
+"typeOfBlood" = "نوع الدم";
+"age" = "العمر";
+"phone" = "الجوال";
+"email" = "الايميل";
+"password" = "كلمة السر";
+"confrimPassword" = "كلمة السر مره اخرى";
+"location" = "الموقع";
+"note" = "مذكرة";
+"date" = "التاريخ";
+"home" = "الصفحة الرئيسية";
+"howManyTimesDoYouDonate" = "كم مرة تبرعت ";
+"haveYouTravelledLast14Days" = "هل سافرت اخر ١٤ يوم؟";
+"haveYouTakenAspirin" = "هل اخذت جرعة اسبرين اخر ٤٨ ساعة؟?";
+"haveYouDonatedLast60Days" = "هل تبرعت بالدم اخر ٦٠ يوم؟";
+"haveYouhadSurgery" = "هل اجريت عملية اخر ١٢ شهر؟";
+"add" = "اضافة";
+"profile" = "الملف الشخصي";
+"logOut" = "تسجيل خروج";
+"update" = "تحديث";
+"delete" = "حذف";
+

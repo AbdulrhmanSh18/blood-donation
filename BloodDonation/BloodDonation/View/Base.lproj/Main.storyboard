@@ -40,7 +40,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PvV-5j-1DZ">
                                                         <rect key="frame" x="0.0" y="40.5" width="343" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -60,7 +60,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TnL-Ox-qt6">
                                                         <rect key="frame" x="0.0" y="40.5" width="343" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="join" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -112,7 +112,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="6mM-bK-0sk"/>
                     <connections>
+                        <outlet property="emailLabel" destination="Sfn-pd-ZI1" id="Ffe-Kg-8sc"/>
                         <outlet property="emailTextFieldLogin" destination="PvV-5j-1DZ" id="jGP-0m-ynR"/>
+                        <outlet property="loginButton" destination="1wu-o8-QR8" id="udS-Wl-SEW"/>
+                        <outlet property="loginPage" destination="VHN-YU-vTD" id="Nvr-FL-zK4"/>
+                        <outlet property="passwordLabel" destination="Zp1-ms-Ze5" id="kYT-hm-lX7"/>
                         <outlet property="passwordTextFieldLogin" destination="TnL-Ox-qt6" id="5xr-GN-p8p"/>
                     </connections>
                 </viewController>
@@ -163,7 +167,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nme-Ki-Fww">
                                                 <rect key="frame" x="0.0" y="32.5" width="343" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="username"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -186,7 +190,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8pD-TX-kZm">
                                                         <rect key="frame" x="0.0" y="32.5" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -197,8 +201,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9k4-Us-8HY">
                                                 <rect key="frame" x="184" y="2.5" width="159" height="66.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWo-DI-Bwo">
-                                                        <rect key="frame" x="58" y="0.0" width="43.5" height="32.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWo-DI-Bwo">
+                                                        <rect key="frame" x="56" y="0.0" width="47" height="32.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -206,7 +210,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GBv-e5-Wmt">
                                                         <rect key="frame" x="0.0" y="32.5" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -231,7 +235,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TgT-fS-WBP">
                                                 <rect key="frame" x="86.5" y="0.0" width="256.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="phonePad" returnKeyType="next" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="tel"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -247,7 +251,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-tc-WOh">
                                                 <rect key="frame" x="0.0" y="32.5" width="343" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -267,7 +271,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfG-jI-SyO">
                                                 <rect key="frame" x="0.0" y="32.5" width="343" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="new-password"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -287,7 +291,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkS-K0-StS">
                                                 <rect key="frame" x="0.0" y="32.5" width="343" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="join" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -343,12 +347,21 @@
                     </view>
                     <navigationItem key="navigationItem" id="rsc-il-dnj"/>
                     <connections>
+                        <outlet property="ageLabel" destination="EWo-DI-Bwo" id="LYS-KX-uqw"/>
                         <outlet property="ageTextField" destination="GBv-e5-Wmt" id="Oqe-fG-pSZ"/>
+                        <outlet property="conPasswordLabel" destination="Xbi-gm-16s" id="Usj-wb-n55"/>
                         <outlet property="confrimPasswordTextField" destination="hkS-K0-StS" id="8Xr-8Y-BLF"/>
+                        <outlet property="emailLabel" destination="Ww4-Bb-z3w" id="vUp-34-XhQ"/>
                         <outlet property="emailTextField" destination="ceK-tc-WOh" id="Gu8-dO-76O"/>
+                        <outlet property="passwordLabel" destination="MXi-66-03o" id="Sl0-nJ-OaF"/>
                         <outlet property="passwordTextField" destination="bfG-jI-SyO" id="wJd-Om-1qm"/>
+                        <outlet property="phoneLabel" destination="hV3-11-28A" id="BOv-et-3tH"/>
                         <outlet property="phoneTextFeild" destination="TgT-fS-WBP" id="Q4X-67-7fn"/>
+                        <outlet property="registerButton" destination="pkp-qS-bsj" id="4bg-KH-UKA"/>
+                        <outlet property="signInNewUser" destination="IOG-8Z-o71" id="rjw-Xb-R6A"/>
+                        <outlet property="typeBloodLabel" destination="3h8-Ie-tkV" id="sA3-t5-uBg"/>
                         <outlet property="typeOfBloodTextField" destination="8pD-TX-kZm" id="CEt-LH-fui"/>
+                        <outlet property="userNameLabel" destination="k3O-tD-MsF" id="3Sx-ej-LFF"/>
                         <outlet property="userNameTextField" destination="nme-Ki-Fww" id="FVV-TQ-AHK"/>
                         <outlet property="userRegisterImageView" destination="Flx-Bh-9wF" id="nlA-Qk-0d1"/>
                     </connections>
@@ -421,7 +434,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zP0-e6-mJU">
                                                     <rect key="frame" x="16" y="13" width="86" height="72"/>
@@ -451,8 +464,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                            <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                         <connections>
                                             <outlet property="datePost" destination="DPO-iv-g1f" id="Gag-Ve-jhs"/>
                                             <outlet property="donateTimes" destination="GFJ-km-fbi" id="8i5-9p-Kq1"/>
@@ -506,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WcJ-Zy-mdq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4412" y="902.69865067466276"/>
+            <point key="canvasLocation" x="4412" y="859"/>
         </scene>
         <!--Item-->
         <scene sceneID="9UC-RW-s2j">
@@ -582,7 +596,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mc-yz-vJf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="1737"/>
+            <point key="canvasLocation" x="4412" y="1609"/>
         </scene>
         <!--Add-->
         <scene sceneID="Dz9-Jf-gzD">
@@ -593,21 +607,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="K1a-3p-a4b">
-                                <rect key="frame" x="100" y="163" width="13" height="8"/>
+                                <rect key="frame" x="104" y="205.5" width="13" height="8"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8l-8U-GcJ">
-                                <rect key="frame" x="70" y="150" width="59" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="have you travelled last 14 days?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOK-4k-oEe">
                                 <rect key="frame" x="16" y="358" width="240" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -630,7 +638,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Have you taken aspirin within last 48 hours?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgX-XG-NTw">
                                 <rect key="frame" x="16" y="408" width="240" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -645,7 +653,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Have you donated blood within last 60 days?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iql-mh-gmA">
                                 <rect key="frame" x="16" y="458" width="240" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -660,7 +668,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Have you had a surgery whitin last 12 months?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq0-eU-cXC">
                                 <rect key="frame" x="16" y="508" width="240" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -676,27 +684,20 @@
                                 <rect key="frame" x="70" y="192" width="234" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="location"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-KE-fBg">
                                 <rect key="frame" x="70" y="234" width="234" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="address-level1"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5pa-T2-ic2">
                                 <rect key="frame" x="254" y="276" width="50" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-gn-1vg">
-                                <rect key="frame" x="41" y="102" width="263" height="40"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="dateChange:" destination="PDW-3n-ocq" eventType="valueChanged" id="sGP-nS-CSm"/>
-                                </connections>
-                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAj-WK-2bq">
                                 <rect key="frame" x="136" y="570" width="138" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -716,11 +717,20 @@
                                         </fragment>
                                     </attributedString>
                                     <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="handlingAddQ:" destination="PDW-3n-ocq" eventType="touchUpInside" id="kml-r2-MXH"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-gn-1vg">
+                                <rect key="frame" x="56" y="134" width="263" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <connections>
+                                    <action selector="dateChange:" destination="PDW-3n-ocq" eventType="valueChanged" id="sGP-nS-CSm"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I5U-SQ-AvH"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
@@ -730,11 +740,15 @@
                     <connections>
                         <outlet property="actionButtonAdd" destination="kAj-WK-2bq" id="iyQ-l9-ZI0"/>
                         <outlet property="datePicker" destination="3rc-gn-1vg" id="8Uy-5r-EKn"/>
-                        <outlet property="dateTextFieldPost" destination="A8l-8U-GcJ" id="cdL-PD-WJJ"/>
+                        <outlet property="donateQuestionLabel" destination="UUz-wP-Rfm" id="ul6-9l-zA3"/>
                         <outlet property="donateTimesPost" destination="5pa-T2-ic2" id="Rre-OL-ltq"/>
                         <outlet property="locationTextFieldPost" destination="qcv-dY-nao" id="Q9d-pQ-Ytr"/>
                         <outlet property="newimagePost" destination="K1a-3p-a4b" id="Ljb-fq-P5c"/>
                         <outlet property="noteTextFieldPost" destination="yXF-KE-fBg" id="Idg-hr-v77"/>
+                        <outlet property="questionLabel1" destination="gOK-4k-oEe" id="u5L-7J-jJ2"/>
+                        <outlet property="questionLabel2" destination="fgX-XG-NTw" id="N6q-y0-4mb"/>
+                        <outlet property="questionLabel3" destination="iql-mh-gmA" id="lBk-Zj-2SV"/>
+                        <outlet property="questionLabel4" destination="wq0-eU-cXC" id="Skp-Fg-Oil"/>
                         <outlet property="switchQuetion1" destination="adX-p3-hw9" id="l0u-1R-kuB"/>
                         <outlet property="switchQuetion2" destination="MsQ-bu-U7H" id="41g-qW-ebc"/>
                         <outlet property="switchQuetion3" destination="OeX-GI-gGb" id="RwU-FQ-Bm5"/>
@@ -743,7 +757,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWo-Sg-Itw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5392.8000000000002" y="877.51124437781118"/>
+            <point key="canvasLocation" x="5460" y="859"/>
         </scene>
         <!--Profile-->
         <scene sceneID="cHz-aw-acL">
@@ -756,7 +770,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WQx-99-o5x">
                                 <rect key="frame" x="16" y="162" width="343" height="290"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <color key="backgroundColor" systemColor="tertiaryLabelColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLb-lo-hZz">
                                 <rect key="frame" x="48" y="187" width="276" height="29"/>
@@ -807,16 +821,20 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cfx-HL-cYR">
-                                <rect key="frame" x="126" y="519" width="111" height="31"/>
+                                <rect key="frame" x="112" y="519" width="150" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <color key="tintColor" red="0.94313708519999995" green="0.99468315519999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="LogOut" cornerStyle="dynamic">
+                                <buttonConfiguration key="configuration" style="gray" cornerStyle="dynamic">
                                     <backgroundConfiguration key="background">
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <color key="strokeColor" red="1" green="0.35782625680000002" blue="0.26863322150000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </backgroundConfiguration>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="LogOut"/>
+                                    </attributedString>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="logOutHandeling:" destination="17p-xq-gjx" eventType="touchUpInside" id="LXw-fg-346"/>
@@ -829,9 +847,9 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="Uqj-PC-7tU"/>
                     <connections>
                         <outlet property="ageLabel" destination="og2-wf-ont" id="c0U-8N-KD6"/>
+                        <outlet property="brofileButoonLogeOut" destination="Cfx-HL-cYR" id="QwK-WM-2Zo"/>
                         <outlet property="emaillabel" destination="tff-Jv-f2P" id="uq2-XN-a0M"/>
                         <outlet property="typeOfBlood" destination="lFl-MM-TbH" id="Z1O-c9-dKy"/>
-                        <outlet property="updateButtonPrf" destination="Cfx-HL-cYR" id="6SF-me-L9E"/>
                         <outlet property="userImageViewPrf" destination="KED-Yo-yaR" id="bm2-kr-TFq"/>
                         <outlet property="userName" destination="yLb-lo-hZz" id="58X-14-sCM"/>
                         <outlet property="userPhone" destination="5m0-ep-dmk" id="VTK-Ul-Io9"/>
@@ -840,7 +858,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjA-Q4-4cj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6224.8000000000002" y="904.49775112443785"/>
+            <point key="canvasLocation" x="6536.8000000000002" y="858.62068965517244"/>
         </scene>
         <!--Landing View Controller-->
         <scene sceneID="DNk-ZX-KVX">
@@ -946,7 +964,30 @@
                             <constraint firstItem="if9-2I-RKI" firstAttribute="leading" secondItem="DYe-cn-otH" secondAttribute="leading" constant="16" id="uHf-c1-acE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uw1-ha-Neh"/>
+                    <navigationItem key="navigationItem" id="uw1-ha-Neh">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="5ga-db-zcv">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8Fq-3U-ZLD">
+                                <rect key="frame" x="265" y="5" width="94" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="language"/>
+                                <connections>
+                                    <action selector="changeLunguageButton:" destination="CjL-R2-ARi" eventType="touchUpInside" id="9qy-gI-Kvf"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="changeLunguageButton:" destination="CjL-R2-ARi" id="Hik-cA-jfQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="changeLunguageBut" destination="8Fq-3U-ZLD" id="DRU-Kv-xYh"/>
+                        <outlet property="loginButton" destination="nN5-zG-qB5" id="gHK-cB-JQX"/>
+                        <outlet property="nameAppBloodDonation" destination="yg2-Ba-XpS" id="2iv-7Z-6Jg"/>
+                        <outlet property="registerButton" destination="JBD-oD-xaw" id="SAb-fK-ssU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmu-cQ-5gC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -976,6 +1017,7 @@
                 <tabBarController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9ea-rO-i3L" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ED3-b5-woy">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -987,11 +1029,11 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHJ-eF-ITb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3473" y="903"/>
+            <point key="canvasLocation" x="5460" y="0.0"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oti-3j-noZ"/>
+        <segue reference="wSn-bs-Jom"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Bloodtolive" width="940" height="425"/>
@@ -1000,14 +1042,20 @@
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1024,8 +1072,17 @@
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="tertiarySystemFillColor">
             <color red="0.46274509803921571" green="0.46274509803921571" blue="0.50196078431372548" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

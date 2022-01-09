@@ -26,6 +26,11 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateLabelDetails.text = NSLocalizedString("date", comment: "")
+        locationLabelDetails.text = NSLocalizedString("location", comment: "")
+        notLabelDetails.text = NSLocalizedString("note", comment: "")
+        userNamelabel.text = NSLocalizedString("userName", comment: "")
+        
         if let selectedPost = selectedPost,
         let selectedImage = selectedPostImage {
                    dateLabelDetails.text = "The date donation at '  \(selectedPost.date) ' "

@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var userRegisterImageView: UIImageView! {
         didSet {
             userRegisterImageView.layer.borderColor = UIColor.systemRed.cgColor
-            userRegisterImageView.layer.borderWidth = 6.0
+            userRegisterImageView.layer.borderWidth = 3.0
             userRegisterImageView.layer.cornerRadius = userRegisterImageView.bounds.height / 2
             userRegisterImageView.layer.masksToBounds = true
             userRegisterImageView.isUserInteractionEnabled = true
@@ -22,7 +22,16 @@ class RegisterViewController: UIViewController {
             userRegisterImageView.addGestureRecognizer(tabGesture)
         }
     }
+    @IBOutlet weak var signInNewUser: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var typeBloodLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var conPasswordLabel: UILabel!
     
+    @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var typeOfBloodTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -33,6 +42,19 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Localization
+        signInNewUser.text = NSLocalizedString("singIn", comment: "")
+        userNameLabel.text = NSLocalizedString("userName", comment: "")
+        typeBloodLabel.text = NSLocalizedString("typeOfBlood", comment: "")
+        ageLabel.text = NSLocalizedString("age", comment: "")
+        phoneLabel.text = NSLocalizedString("phone", comment: "")
+        emailLabel.text = NSLocalizedString("email", comment: "")
+        passwordLabel.text = NSLocalizedString("password", comment: "")
+        conPasswordLabel.text = NSLocalizedString("confrimPassword", comment: "")
+        registerButton.setTitle(NSLocalizedString("register", comment: ""), for: .normal)
+        
+        
+        
         imagePickerController.delegate = self
     }
     
@@ -47,7 +69,7 @@ class RegisterViewController: UIViewController {
            let password = passwordTextField.text,
            let confrimPassword = confrimPasswordTextField.text,
            password == confrimPassword {
-            
+            Activity.showIndicator(parentView: self.view, childView: activityIndicator)
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let error = error {
                     print("Registration Auth Error",error.localizedDescription)
@@ -83,7 +105,7 @@ class RegisterViewController: UIViewController {
                                             print("Registration Database error",error.localizedDescription)
                                             
                                         }else {
-                                            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController {
+                                            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNavigationController") as? UITabBarController {
                                                 vc.modalPresentationStyle = .fullScreen
                                                 
                                                 self.present(vc, animated: true, completion: nil)
@@ -98,6 +120,7 @@ class RegisterViewController: UIViewController {
         }
     }
 }
+
 extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @objc func selectImage() {
         showAlart()

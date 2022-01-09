@@ -30,10 +30,19 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userPhone: UILabel!
     @IBOutlet weak var emaillabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var updateButtonPrf: UIButton!
+    @IBOutlet weak var brofileButoonLogeOut: UIButton!
+    
     @IBOutlet weak var typeOfBlood: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        userName.text = NSLocalizedString("userName", comment: "")
+        userPhone.text = NSLocalizedString("phone", comment: "")
+        emaillabel.text = NSLocalizedString("email", comment: "")
+        ageLabel.text = NSLocalizedString("age", comment: "")
+        typeOfBlood.text = NSLocalizedString("typeOfBlood", comment: "")
+        brofileButoonLogeOut.setTitle(NSLocalizedString("logOut", comment: ""), for: .normal)
+        
         getProfileData()
     }
     func getProfileData(){

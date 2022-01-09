@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  BloodDonation
+
+  Created by Abdulrhman Abuhyyh on 03/06/1443 AH.
+  
+*/
+
+"bloodDonation" = "Blood Donation";
+"login" = "Login";
+"register" = "Register";
+"singIn" = "Sing in";
+"userName" = "User Name";
+"typeOfBlood" = "Type Blood";
+"age" = "Age";
+"phone" = "Phone";
+"email" = "Email";
+"password" = "Password";
+"confrimPassword" = "Confrim Password";
+"location" = "Location";
+"note" = "Note";
+"date" = "Date";
+"home" = "Home";
+"howManyTimesDoYouDonate" = "How many times do you have donate";
+"haveYouTravelledLast14Days" = "have you travelled last 14 days?";
+"haveYouTakenAspirin" = "Have you taken aspirin within last 48 hours?";
+"haveYouDonatedLast60Days" = "Have you donated blood within last 60 days?";
+"haveYouhadSurgery" = "Have you had a surgery whitin last 12 months?";
+"add" = "Add";
+"profile" = "Profile";
+"logOut" = "Logout";
+"update" = "Update";
+"delete" = "Delete";

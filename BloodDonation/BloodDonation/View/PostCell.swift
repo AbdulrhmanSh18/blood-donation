@@ -18,7 +18,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var userPostImage: UIImageView!{
         didSet {
             userPostImage.layer.borderColor = UIColor.systemRed.cgColor
-            userPostImage.layer.borderWidth = 5.0
+            userPostImage.layer.borderWidth = 3.0
             userPostImage.layer.cornerRadius = userPostImage.bounds.height / 2
             userPostImage.layer.masksToBounds = true
             userPostImage.isUserInteractionEnabled = true
@@ -28,7 +28,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var infoImagePost: UIImageView!{
         didSet {
             infoImagePost.layer.borderColor = UIColor.systemGreen.cgColor
-            infoImagePost.layer.borderWidth = 2.0
+            infoImagePost.layer.borderWidth = 3.0
             infoImagePost.layer.cornerRadius = infoImagePost.bounds.height / 2
             infoImagePost.layer.masksToBounds = true
             infoImagePost.isUserInteractionEnabled = true
@@ -46,6 +46,14 @@ class PostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        datePost.text = NSLocalizedString("date", comment: "")
+        locationPost.text = NSLocalizedString("location", comment: "")
+        userNamePost.text = NSLocalizedString("userName", comment: "")
+        notePost.text = NSLocalizedString("note", comment: "")
+        typeOfBlood.text = NSLocalizedString("typeOfBlood", comment: "")
+        userPhone.text = NSLocalizedString("phone", comment: "")
+        userAgeLabel.text = NSLocalizedString("age", comment: "")
+        donateTimes.text = NSLocalizedString("", comment: "")
         
         // Initialization code
     }

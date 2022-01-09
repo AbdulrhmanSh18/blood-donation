@@ -12,8 +12,19 @@ class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var emailTextFieldLogin: UITextField!
     @IBOutlet weak var passwordTextFieldLogin: UITextField!
+    @IBOutlet weak var loginPage: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Localization for Login Page
+        
+        loginPage.text = NSLocalizedString("login", comment: "")
+        emailLabel.text = NSLocalizedString("email", comment: "")
+        passwordLabel.text = NSLocalizedString("password", comment: "")
+        loginButton.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
 
     }
     

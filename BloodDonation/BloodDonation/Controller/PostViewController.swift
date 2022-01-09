@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import GLKit
 class PostViewController: UIViewController {
     var selectedPost:Post?
     var selectedPostImage:UIImage?
@@ -15,7 +16,7 @@ class PostViewController: UIViewController {
    
     @IBOutlet weak var datePicker: UIDatePicker!
 
-    @IBOutlet weak var dateTextFieldPost: UITextField!
+//    @IBOutlet weak var dateTextFieldPost: UITextField!
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
     
@@ -53,16 +54,27 @@ class PostViewController: UIViewController {
             newimagePost.addGestureRecognizer(tapGesture)
         }
     }
+    @IBOutlet weak var donateQuestionLabel: UILabel!
+    @IBOutlet weak var questionLabel1: UILabel!
+    @IBOutlet weak var questionLabel2: UILabel!
+    @IBOutlet weak var questionLabel3: UILabel!
+    @IBOutlet weak var questionLabel4: UILabel!
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        donateQuestionLabel.text = NSLocalizedString("howManyTimesDoYouDonate", comment: "")
+        questionLabel1.text = NSLocalizedString("haveYouTravelledLast14Days", comment: "")
+        questionLabel2.text = NSLocalizedString("haveYouTakenAspirin", comment: "")
+        questionLabel3.text = NSLocalizedString("haveYouDonatedLast60Days", comment: "")
+        questionLabel4.text = NSLocalizedString("haveYouhadSurgery", comment: "")
+        actionButtonAdd.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
         
 //        createDatePicker()
 
         
         if let selectedPost = selectedPost ,
            let selectedImage = selectedPostImage {
-            dateTextFieldPost.text = selectedPost.date
+//            dateTextFieldPost.text = selectedPost.date
             locationTextFieldPost.text = selectedPost.location
             noteTextFieldPost.text = selectedPost.note
             donateTimesPost.text = selectedPost.donate
