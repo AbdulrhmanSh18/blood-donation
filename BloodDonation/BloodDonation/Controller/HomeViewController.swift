@@ -91,11 +91,9 @@ class HomeViewController: UIViewController {
             if identifier == "toDonationAdd" {
                 let vc = segue.destination as! PostViewController
                 vc.selectedPost = selectedPost
-                vc.selectedPostImage = selectedPostImage
             } else {
                 let vc = segue.destination as! DetailsViewController
                 vc.selectedPost =  selectedPost
-                vc.selectedPostImage = selectedPostImage
             }
         }
     }

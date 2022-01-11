@@ -31,16 +31,24 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var emaillabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var brofileButoonLogeOut: UIButton!
-    
     @IBOutlet weak var typeOfBlood: UILabel!
+    
+    @IBOutlet weak var userNameLbl: UILabel!
+    @IBOutlet weak var phoneLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var ageLble: UILabel!
+    @IBOutlet weak var typeBloodLbl: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userName.text = NSLocalizedString("userName", comment: "")
-        userPhone.text = NSLocalizedString("phone", comment: "")
-        emaillabel.text = NSLocalizedString("email", comment: "")
-        ageLabel.text = NSLocalizedString("age", comment: "")
-        typeOfBlood.text = NSLocalizedString("typeOfBlood", comment: "")
+        
+        userNameLbl.text = NSLocalizedString("userName", comment: "")
+        phoneLbl.text = NSLocalizedString("phone", comment: "")
+        emailLbl.text = NSLocalizedString("email", comment: "")
+        ageLble.text = NSLocalizedString("age", comment: "")
+        typeBloodLbl.text = NSLocalizedString("typeOfBlood", comment: "")
         brofileButoonLogeOut.setTitle(NSLocalizedString("logOut", comment: ""), for: .normal)
         
         getProfileData()
@@ -101,11 +109,9 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if identifier == "toDonationAdd" {
             let vc = segue.destination as! PostViewController
             vc.selectedPost = selectedPost
-            vc.selectedPostImage = selectedPostImage
         } else {
             let vc = segue.destination as! DetailsViewController
             vc.selectedPost =  selectedPost
-            vc.selectedPostImage = selectedPostImage
         }
     }
 }

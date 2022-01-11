@@ -13,7 +13,6 @@ struct Post {
     var location = ""
     var note = ""
     var donate = ""
-    var imageUrl = ""
     var user:User
     var createdAt:Timestamp?
     
@@ -22,14 +21,13 @@ struct Post {
            let location = dict["location"] as? String,
            let note = dict["note"] as? String,
            let donate = dict["donate"] as? String,
-           let imageUrl = dict["imageUrl"] as? String,
-            let createdAt = dict["createdAt"] as? Timestamp{
+            let createdAt = dict["createdAt"] as? Timestamp {
             self.date = date
             self.location = location
             self.note = note
             self.donate = donate
-            self.imageUrl = imageUrl
             self.createdAt = createdAt
+            
         }
         self.id = id
         self.user = user

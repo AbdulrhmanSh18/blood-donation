@@ -27,8 +27,8 @@ class PostCell: UITableViewCell {
     }
     @IBOutlet weak var infoImagePost: UIImageView!{
         didSet {
-            infoImagePost.layer.borderColor = UIColor.systemGreen.cgColor
-            infoImagePost.layer.borderWidth = 3.0
+            infoImagePost.layer.borderColor = UIColor.systemRed.cgColor
+            infoImagePost.layer.borderWidth = 1.0
             infoImagePost.layer.cornerRadius = infoImagePost.bounds.height / 2
             infoImagePost.layer.masksToBounds = true
             infoImagePost.isUserInteractionEnabled = true
@@ -72,7 +72,6 @@ class PostCell: UITableViewCell {
         typeOfBlood.text = post.user.typeOfBlood
         userAgeLabel.text = "age  \(post.user.age)"
         donateTimes.text = post.donate
-        userPostImage.loadImageUsingCache(with: post.imageUrl)
         infoImagePost.loadImageUsingCache(with: post.user.imageUrl)
         return self
     }

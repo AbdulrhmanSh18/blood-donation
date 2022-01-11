@@ -7,16 +7,13 @@
 
 import UIKit
 import Firebase
-import GLKit
 class PostViewController: UIViewController {
     var selectedPost:Post?
-    var selectedPostImage:UIImage?
     
-   
-   
+    
+    
     @IBOutlet weak var datePicker: UIDatePicker!
-
-//    @IBOutlet weak var dateTextFieldPost: UITextField!
+    //    @IBOutlet weak var dateTextFieldPost: UITextField!
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
     
@@ -26,34 +23,22 @@ class PostViewController: UIViewController {
             switchQuetion1.isOn = false
         }
     }
-        @IBOutlet weak var switchQuetion2: UISwitch!{
-    didSet {
-        switchQuetion2.isOn = false
-    }
-}
-        @IBOutlet weak var switchQuetion3: UISwitch!{
-            didSet {
-                switchQuetion3.isOn = false
-            }
-        }
-        @IBOutlet weak var switchQuetion4: UISwitch!{
-            didSet {
-                switchQuetion4.isOn = false
-            }
-        }
-    @IBOutlet weak var actionButtonAdd: UIButton!
-    @IBOutlet weak var newimagePost: UIImageView! {
+    @IBOutlet weak var switchQuetion2: UISwitch!{
         didSet {
-            
-            newimagePost.layer.borderColor = UIColor.systemRed.cgColor
-            newimagePost.layer.borderWidth = 3.0
-            newimagePost.layer.cornerRadius = newimagePost.bounds.height / 2
-            newimagePost.layer.masksToBounds = true
-            newimagePost.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
-            newimagePost.addGestureRecognizer(tapGesture)
+            switchQuetion2.isOn = false
         }
     }
+    @IBOutlet weak var switchQuetion3: UISwitch!{
+        didSet {
+            switchQuetion3.isOn = false
+        }
+    }
+    @IBOutlet weak var switchQuetion4: UISwitch!{
+        didSet {
+            switchQuetion4.isOn = false
+        }
+    }
+    @IBOutlet weak var actionButtonAdd: UIButton!
     @IBOutlet weak var donateQuestionLabel: UILabel!
     @IBOutlet weak var questionLabel1: UILabel!
     @IBOutlet weak var questionLabel2: UILabel!
@@ -62,6 +47,10 @@ class PostViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationTextFieldPost.placeholder = NSLocalizedString("location", comment: "")
+        noteTextFieldPost.placeholder = NSLocalizedString("note", comment: "")
+        donateTimesPost.placeholder = NSLocalizedString("howMany", comment: "")
+        donateTimesPost.placeholder = NSLocalizedString("", comment: "")
         donateQuestionLabel.text = NSLocalizedString("howManyTimesDoYouDonate", comment: "")
         questionLabel1.text = NSLocalizedString("haveYouTravelledLast14Days", comment: "")
         questionLabel2.text = NSLocalizedString("haveYouTakenAspirin", comment: "")
@@ -69,37 +58,37 @@ class PostViewController: UIViewController {
         questionLabel4.text = NSLocalizedString("haveYouhadSurgery", comment: "")
         actionButtonAdd.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
         
-//        createDatePicker()
-
+        //        createDatePicker()
         
-        if let selectedPost = selectedPost ,
-           let selectedImage = selectedPostImage {
-//            dateTextFieldPost.text = selectedPost.date
+        
+        if let selectedPost = selectedPost {
+            //            dateTextFieldPost.text = selectedPost.date
             locationTextFieldPost.text = selectedPost.location
             noteTextFieldPost.text = selectedPost.note
             donateTimesPost.text = selectedPost.donate
-            newimagePost.image = selectedImage
             actionButtonAdd.setTitle("Update Post", for: .normal)
+            actionButtonAdd.setTitle(NSLocalizedString("update", comment: ""), for: .normal)
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
             // delete butten
             let deleteButton = UIButton(frame: CGRect(x: 80, y: 650, width: 250, height: 50))
             deleteButton.setTitle("Delete", for: .normal)
+            deleteButton.setTitle(NSLocalizedString("delete", comment: ""), for: .normal)
             self.navigationItem.rightBarButtonItem = deleteBarButton
             deleteButton.backgroundColor = .systemGray4
-            
             deleteButton.setTitleColor(UIColor.black, for: .normal)
             deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
             self.view.addSubview(deleteButton)
-
+            
         }else {
-            actionButtonAdd.setTitle("Add", for: .normal)
+            actionButtonAdd.setTitle("add", for: .normal)
+            actionButtonAdd.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
             self.navigationItem.rightBarButtonItem = nil
         }
     }
     @IBAction func dateChange(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-     
+        
     }
     @IBAction func switchActionOne(_ sender: Any) {
         if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
@@ -157,74 +146,57 @@ class PostViewController: UIViewController {
     @IBAction func handlingAddQ(_ sender: Any) {
         let formatter = DateFormatter()
         let locale = Locale(identifier: "en_US_POSIX")
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.dateStyle = DateFormatter.Style.medium
-            formatter.locale = locale
-            formatter.dateFormat = "yyyy-MM-dd"
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateStyle = DateFormatter.Style.medium
+        formatter.locale = locale
+        formatter.dateFormat = "yyyy-MM-dd"
         let date = datePicker.date
         
         let dateString = formatter.string(from: date)
-
-        if let image = newimagePost.image,
-           let imageData = image.jpegData(compressionQuality: 0.25),
-//           let date = dateTextFieldPost.text,
-           let location = locationTextFieldPost.text,
+        
+        if let location = locationTextFieldPost.text,
            let note = noteTextFieldPost.text,
            let donate = donateTimesPost.text,
            let currentUser = Auth.auth().currentUser {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
-//                        ref.addDocument(data:)
+            //                        ref.addDocument(data:)
             var postId = ""
             if let selectedPost = selectedPost {
                 postId = selectedPost.id
             }else {
                 postId = "\(Firebase.UUID())"
             }
-            let storageRef = Storage.storage().reference(withPath: "posts/\(currentUser.uid)/\(postId)")
-            let updloadMeta = StorageMetadata.init()
-            updloadMeta.contentType = "image/jpeg"
-            storageRef.putData(imageData, metadata: updloadMeta) { storageMeta, error in
+            var postData = [String:Any]()
+            let db = Firestore.firestore()
+            let ref = db.collection("posts")
+            if let selectedPost = self.selectedPost {
+                postData = [
+                    "userId":selectedPost.user.id,
+                    "date":dateString,
+                    "location":location,
+                    "note":note,
+                    "donate":donate,
+                    "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
+                    "updatedAt": FieldValue.serverTimestamp()
+                ]
+            }else {
+                postData = [
+                    "userId":currentUser.uid,
+                    "date":dateString,
+                    "location":location,
+                    "note":note,
+                    "donate":donate,
+                    "createdAt":FieldValue.serverTimestamp(),
+                    "updatedAt": FieldValue.serverTimestamp()
+                ]
+            }
+            ref.document(postId).setData(postData) {
+                error in
                 if let error = error {
-                    print("Upload error",error.localizedDescription)
+                    print("FireStore Error",error.localizedDescription)
                 }
-                storageRef.downloadURL { url, error in
-                    var postData = [String:Any]()
-                    if let url = url {
-                        let db = Firestore.firestore()
-                        let ref = db.collection("posts")
-                        if let selectedPost = self.selectedPost {
-                            postData = [
-                                "userId":selectedPost.user.id,
-                                "date":dateString,
-                                "location":location,
-                                "note":note,
-                                "donate":donate,
-                                "imageUrl":url.absoluteString,
-                                "createdAt":selectedPost.createdAt ?? FieldValue.serverTimestamp(),
-                                "updatedAt": FieldValue.serverTimestamp()
-                            ]
-                        }else {
-                            postData = [
-                                "userId":currentUser.uid,
-                                "date":dateString,
-                                "location":location,
-                                "note":note,
-                                "donate":donate,
-                                "imageUrl":url.absoluteString,
-                                "createdAt":FieldValue.serverTimestamp(),
-                                "updatedAt": FieldValue.serverTimestamp()
-                            ]
-                        }
-                        ref.document(postId).setData(postData) {
-                            error in
-                            if let error = error {
-                                print("FireStore Error",error.localizedDescription)
-                            }
-                            Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                }
+                Activity.removeIndicator(parentView: self.view, childView: self.activityIndicator)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -236,13 +208,13 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     private func showAlert() {
         
         let alert = UIAlertController(title: "Choose Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "camera".localiz, style: .default, handler: {(action: UIAlertAction) in
             self.getImage(fromSourceType: .camera)
         }))
-        alert.addAction(UIAlertAction(title: "Photo Album", style: .default, handler: {(action: UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "photoAlbum".localiz, style: .default, handler: {(action: UIAlertAction) in
             self.getImage(fromSourceType: .photoLibrary)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: "cancel".localiz, style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     //get image from source type
@@ -257,32 +229,23 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
-//    func createDatePicker(){
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-//        toolbar.setItems([doneButoon], animated: true)
-//        dateTextFieldPost.inputAccessoryView = toolbar
-//        dateTextFieldPost.inputView = dateText
-//        datePicker.datePickerMode = .date
-//
-//    }
-//    @objc func donePressed(){
-//    let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-////        formatter.timeStyle = .none
-//        dateTextFieldPost.text = formatter.string(from: datePicker.date)
-//        dateTextFieldPost.text = "\(datePicker.date)"
-//        self.view.endEditing(true)
-//    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        newimagePost.image = chosenImage
-        dismiss(animated: true, completion: nil)
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-        
-    }
+    //    func createDatePicker(){
+    //        let toolbar = UIToolbar()
+    //        toolbar.sizeToFit()
+    //
+    //        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+    //        toolbar.setItems([doneButoon], animated: true)
+    //        dateTextFieldPost.inputAccessoryView = toolbar
+    //        dateTextFieldPost.inputView = dateText
+    //        datePicker.datePickerMode = .date
+    //
+    //    }
+    //    @objc func donePressed(){
+    //    let formatter = DateFormatter()
+    //        formatter.dateStyle = .medium
+    ////        formatter.timeStyle = .none
+    //        dateTextFieldPost.text = formatter.string(from: datePicker.date)
+    //        dateTextFieldPost.text = "\(datePicker.date)"
+    //        self.view.endEditing(true)
+    //    }
 }

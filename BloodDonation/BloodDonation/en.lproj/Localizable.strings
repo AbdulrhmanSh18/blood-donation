@@ -7,6 +7,7 @@
 */
 
 "bloodDonation" = "Blood Donation";
+"changeLunguageBut" = "عربي";
 "login" = "Login";
 "register" = "Register";
 "singIn" = "Sing in";
@@ -31,3 +32,14 @@
 "logOut" = "Logout";
 "update" = "Update";
 "delete" = "Delete";
+"howMany" = "0";
+"errorPassword" = "Please make Sure your username or password is a laste 8 charecter, contains a special charecters and numbers⚠️";
+"errorFillFields" = "Please fill in all fields";
+"currentLanguage" = "تغيير اللغة";
+"camera" = "Camera";
+"phothAlbum" = "Photh Album";
+"cancle" = "Cancel";
+"choosePic" = "Choose Profile Pictur";
+"passwordNotCorrect" = "Password it's Not Currect";
+"choocePictur" = "where do you want to pick tour image frome?";
+"Empty" = "Empty";

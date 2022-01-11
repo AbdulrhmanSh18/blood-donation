@@ -7,6 +7,7 @@
 */
 
 "bloodDonation" = "التبرع بالدم";
+"changeLunguageBut" = "EN";
 "login" = "تسجيل دخول";
 "register" = "تسجيل جديد";
 "singIn" = "تسجيل";
@@ -23,7 +24,7 @@
 "home" = "الصفحة الرئيسية";
 "howManyTimesDoYouDonate" = "كم مرة تبرعت ";
 "haveYouTravelledLast14Days" = "هل سافرت اخر ١٤ يوم؟";
-"haveYouTakenAspirin" = "هل اخذت جرعة اسبرين اخر ٤٨ ساعة؟?";
+"haveYouTakenAspirin" = "هل اخذت جرعة اسبرين اخر ٤٨ ساعة؟";
 "haveYouDonatedLast60Days" = "هل تبرعت بالدم اخر ٦٠ يوم؟";
 "haveYouhadSurgery" = "هل اجريت عملية اخر ١٢ شهر؟";
 "add" = "اضافة";
@@ -31,4 +32,14 @@
 "logOut" = "تسجيل خروج";
 "update" = "تحديث";
 "delete" = "حذف";
-
+"howMany" = "0";
+"errorPassword" = "الرجاء التآكد من اسم المستخدم او كلمة المرور انها لاتقل عن ٨ خانات علي الاقل وتتكون من رموز واحرف وارقام⚠️";
+"errorFillFields" = "الرجاء التآكد من تعبئة جميع الحقول";
+"currentLanguage" = "Change Lunguage";
+"camera" = "الكميرا";
+"phothAlbum" = "البوم الصور";
+"cancle" = "الغاء";
+"choosePic" = "اختر صورة";
+"passwordNotCorrect" = "كلمة المرور غير صحيحة";
+"choocePictur" = "اختر الصورة التي تريدها من الخيارات التالية";
+"Empty" = "متاح";

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BA1D54872784D91900CE02C6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D54862784D91900CE02C6 /* ProfileViewController.swift */; };
-		BA1D548927862B7400CE02C6 /* helping.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D548827862B7400CE02C6 /* helping.swift */; };
 		BA686A282779927900D4D200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A272779927900D4D200 /* AppDelegate.swift */; };
 		BA686A2A2779927900D4D200 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A292779927900D4D200 /* SceneDelegate.swift */; };
 		BA686A2F2779927900D4D200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA686A2D2779927900D4D200 /* Main.storyboard */; };
@@ -30,11 +29,13 @@
 		BA686A5B2779B89100D4D200 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A5A2779B89100D4D200 /* Activity.swift */; };
 		BA686A5D2779B8F300D4D200 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA686A5C2779B8F300D4D200 /* PostCell.swift */; };
 		BA7DE096278708A80063849E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA7DE098278708A80063849E /* Localizable.strings */; };
+		BA7DE09B278C13790063849E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DE09A278C13790063849E /* Utilities.swift */; };
+		BA7DE09E278C35390063849E /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA7DE09D278C35390063849E /* IQKeyboardManagerSwift */; };
+		BA7DE0A2278C5CE00063849E /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DE0A1278C5CE00063849E /* Localization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA1D54862784D91900CE02C6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		BA1D548827862B7400CE02C6 /* helping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helping.swift; sourceTree = "<group>"; };
 		BA686A242779927900D4D200 /* BloodDonation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloodDonation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA686A272779927900D4D200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA686A292779927900D4D200 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +60,8 @@
 		BA7DE08F278704020063849E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BA7DE097278708A80063849E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BA7DE099278708A90063849E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BA7DE09A278C13790063849E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		BA7DE0A1278C5CE00063849E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA686A3F2779939A00D4D200 /* FirebaseAuth in Frameworks */,
+				BA7DE09E278C35390063849E /* IQKeyboardManagerSwift in Frameworks */,
 				BA686A412779939A00D4D200 /* FirebaseFirestore in Frameworks */,
 				BA686A432779939A00D4D200 /* FirebaseStorage in Frameworks */,
 			);
@@ -112,7 +116,8 @@
 			children = (
 				BA686A582779B87200D4D200 /* ImageView.swift */,
 				BA686A5A2779B89100D4D200 /* Activity.swift */,
-				BA1D548827862B7400CE02C6 /* helping.swift */,
+				BA7DE09A278C13790063849E /* Utilities.swift */,
+				BA7DE0A1278C5CE00063849E /* Localization.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				BA686A3E2779939A00D4D200 /* FirebaseAuth */,
 				BA686A402779939A00D4D200 /* FirebaseFirestore */,
 				BA686A422779939A00D4D200 /* FirebaseStorage */,
+				BA7DE09D278C35390063849E /* IQKeyboardManagerSwift */,
 			);
 			productName = BloodDonation;
 			productReference = BA686A242779927900D4D200 /* BloodDonation.app */;
@@ -203,6 +209,7 @@
 			mainGroup = BA686A1B2779927900D4D200;
 			packageReferences = (
 				BA686A3D2779939A00D4D200 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BA7DE09C278C35390063849E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = BA686A252779927900D4D200 /* Products */;
 			projectDirPath = "";
@@ -234,11 +241,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA686A282779927900D4D200 /* AppDelegate.swift in Sources */,
+				BA7DE0A2278C5CE00063849E /* Localization.swift in Sources */,
 				BA686A492779B68900D4D200 /* LandingViewController.swift in Sources */,
 				BA686A5D2779B8F300D4D200 /* PostCell.swift in Sources */,
-				BA1D548927862B7400CE02C6 /* helping.swift in Sources */,
 				BA686A512779B75000D4D200 /* PostViewController.swift in Sources */,
 				BA1D54872784D91900CE02C6 /* ProfileViewController.swift in Sources */,
+				BA7DE09B278C13790063849E /* Utilities.swift in Sources */,
 				BA686A532779B78600D4D200 /* DetailsViewController.swift in Sources */,
 				BA686A592779B87200D4D200 /* ImageView.swift in Sources */,
 				BA686A2A2779927900D4D200 /* SceneDelegate.swift in Sources */,
@@ -489,6 +497,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		BA7DE09C278C35390063849E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -506,6 +522,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA686A3D2779939A00D4D200 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		BA7DE09D278C35390063849E /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA7DE09C278C35390063849E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

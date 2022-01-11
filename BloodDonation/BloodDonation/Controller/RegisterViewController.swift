@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 
 class RegisterViewController: UIViewController {
+    var groupOfBloodType = ["A+","A-","AB+","AB-","O+","O-","B+","B-"]
+    let pickerViewTOB = UIPickerView()
     let imagePickerController = UIImagePickerController()
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var userRegisterImageView: UIImageView! {
@@ -22,6 +24,7 @@ class RegisterViewController: UIViewController {
             userRegisterImageView.addGestureRecognizer(tabGesture)
         }
     }
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var signInNewUser: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var typeBloodLabel: UILabel!
@@ -42,15 +45,19 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        typeOfBloodTextField.inputView = pickerViewTOB
+        pickerViewTOB.dataSource = self
+        pickerViewTOB.delegate = self
+        setUpElements()
         //Localization
-        signInNewUser.text = NSLocalizedString("singIn", comment: "")
-        userNameLabel.text = NSLocalizedString("userName", comment: "")
-        typeBloodLabel.text = NSLocalizedString("typeOfBlood", comment: "")
-        ageLabel.text = NSLocalizedString("age", comment: "")
-        phoneLabel.text = NSLocalizedString("phone", comment: "")
-        emailLabel.text = NSLocalizedString("email", comment: "")
-        passwordLabel.text = NSLocalizedString("password", comment: "")
-        conPasswordLabel.text = NSLocalizedString("confrimPassword", comment: "")
+        signInNewUser.text = "singIn".localiz
+        userNameLabel.text = "userName".localiz
+        typeBloodLabel.text = "typeOfBlood".localiz
+        ageLabel.text = "age".localiz
+        phoneLabel.text = "phone".localiz
+        emailLabel.text = "email".localiz
+        passwordLabel.text = "password".localiz
+        conPasswordLabel.text = "confrimPassword".localiz
         registerButton.setTitle(NSLocalizedString("register", comment: ""), for: .normal)
         
         
@@ -59,6 +66,10 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func handelingRegisterButton(_ sender: Any) {
+        let error = validateField()
+        if error != nil {
+            showError(error!)
+        }else
         if let image = userRegisterImageView.image,
            let imageData = image.jpegData(compressionQuality: 0.25),
            let userName = userNameTextField.text,
@@ -117,23 +128,36 @@ class RegisterViewController: UIViewController {
                     }
                 }
             }
+        }else {
+            if passwordTextField.text != confrimPasswordTextField.text! {
+                errorLabel.text = "passwordNotCorrect".localiz
+                errorLabel.alpha = 1
+            }else {
+                errorLabel.text = "Empty".localiz
+                errorLabel.alpha = 1
+            }
         }
     }
 }
-
 extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @objc func selectImage() {
         showAlart()
     }
+    func showError(_ message:String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
+    }
+    
     func showAlart(){
-        let alert = UIAlertController(title: "choose Profile Picture", message: "where do you want to pick tour image frome?", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { Action in
+        let alert = UIAlertController(title: "choosePic".localiz, message: "choocePictur".localiz, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "camera".localiz, style: .default) { Action in
             self.getImage(from: .camera)
+            
         }
-        let galeryAction = UIAlertAction(title: "Photh Album", style: .default) { Action in
+        let galeryAction = UIAlertAction(title: "phothAlbum".localiz, style: .default) { Action in
             self.getImage(from: .photoLibrary)
         }
-        let dismissAction = UIAlertAction(title: "Cancle", style: .destructive) { Action in
+        let dismissAction = UIAlertAction(title: "cancle".localiz, style: .destructive) { Action in
             self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cameraAction)
@@ -147,6 +171,25 @@ extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationCo
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
+    func validateField() -> String? {
+        if userNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            typeOfBloodTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            ageTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            phoneTextFeild.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            confrimPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "errorFillFields".localiz
+        }
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isPasswordValid(cleanedPassword) ==  false {
+            return "errorPassword".localiz
+        }
+        return nil
+    }
+    func setUpElements() {
+        errorLabel.alpha = 0
+    }
     func imagePickerController(_ picker:UIImagePickerController ,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return
             
@@ -157,5 +200,24 @@ extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
 }
 
+extension RegisterViewController:UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return groupOfBloodType.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return groupOfBloodType[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        typeOfBloodTextField.text = groupOfBloodType[row]
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
