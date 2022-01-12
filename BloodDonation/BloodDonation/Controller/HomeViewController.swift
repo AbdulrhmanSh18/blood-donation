@@ -11,8 +11,9 @@ class HomeViewController: UIViewController {
     var posts = [Post]()
     var selectedPost:Post?
     var selectedPostImage:UIImage?
-    
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    var filterData : [Post]!
     @IBOutlet weak var postTabelViewHome: UITableView!{
         didSet{
             postTabelViewHome.delegate = self
@@ -21,6 +22,9 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
+        
+        filterData = posts
         getPosts()
     }
     func getPosts() {
@@ -100,12 +104,20 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        if filterData.count > 0 {
+            return filterData.count
+            } else {
+                return posts.count
+            }
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath) as! PostCell
-        return cell.configure(with: posts[indexPath.row])
+        if filterData.count > 0 {
+            return cell.configure(with: filterData[indexPath.row])
+            } else {
+              return cell.configure(with: posts[indexPath.row])
+            }
     }
 }
 extension HomeViewController : UITableViewDelegate {
@@ -124,3 +136,23 @@ extension HomeViewController : UITableViewDelegate {
         }
     }
 }
+extension HomeViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar:UISearchBar, textDidChange searchText:String) {
+        filterData = []
+        if searchText == "" {
+            filterData = posts
+        }else {
+            for flter in posts {
+                if flter.user.typeOfBlood.lowercased().contains(searchText.lowercased()) ||
+                    flter.user.userName.lowercased().contains(searchText.lowercased()) ||
+                    flter.user.age.lowercased().contains(searchText.lowercased()) ||
+                    flter.date.lowercased().contains(searchText.lowercased()) {
+                    filterData.append(flter)
+                }
+            }
+        }
+        self.postTabelViewHome.reloadData()
+        
+    }
+}
+

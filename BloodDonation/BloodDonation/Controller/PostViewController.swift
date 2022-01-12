@@ -16,8 +16,13 @@ class PostViewController: UIViewController {
     //    @IBOutlet weak var dateTextFieldPost: UITextField!
     @IBOutlet weak var locationTextFieldPost: UITextField!
     @IBOutlet weak var noteTextFieldPost: UITextField!
-    
     @IBOutlet weak var donateTimesPost: UITextField!
+    @IBOutlet weak var viewQuestions: UIView!{
+        didSet{
+            viewQuestions.layer.masksToBounds = true
+            viewQuestions.layer.cornerRadius = 18
+        }
+    }
     @IBOutlet weak var switchQuetion1: UISwitch!{
         didSet {
             switchQuetion1.isOn = false
@@ -44,18 +49,40 @@ class PostViewController: UIViewController {
     @IBOutlet weak var questionLabel2: UILabel!
     @IBOutlet weak var questionLabel3: UILabel!
     @IBOutlet weak var questionLabel4: UILabel!
+    @IBOutlet weak var answarLblQ1: UILabel!{
+        didSet{
+            answarLblQ1.text = "No"
+        }
+    }
+    @IBOutlet weak var answarLblQ2: UILabel!{
+        didSet{
+            answarLblQ2.text = "No"
+        }
+    }
+    @IBOutlet weak var answarLblQ3: UILabel!{
+        didSet{
+            answarLblQ3.text = "No"
+        }
+    }
+    @IBOutlet weak var answarLblQ4: UILabel!{
+        didSet{
+            answarLblQ4.text = "No"
+        }
+    }
     let activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationTextFieldPost.placeholder = NSLocalizedString("location", comment: "")
-        noteTextFieldPost.placeholder = NSLocalizedString("note", comment: "")
-        donateTimesPost.placeholder = NSLocalizedString("howMany", comment: "")
+        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
+        styleButton()
+        locationTextFieldPost.placeholder = "location".localiz
+        noteTextFieldPost.placeholder = "note".localiz
+        donateTimesPost.placeholder = "howMany".localiz
         donateTimesPost.placeholder = NSLocalizedString("", comment: "")
-        donateQuestionLabel.text = NSLocalizedString("howManyTimesDoYouDonate", comment: "")
-        questionLabel1.text = NSLocalizedString("haveYouTravelledLast14Days", comment: "")
-        questionLabel2.text = NSLocalizedString("haveYouTakenAspirin", comment: "")
-        questionLabel3.text = NSLocalizedString("haveYouDonatedLast60Days", comment: "")
-        questionLabel4.text = NSLocalizedString("haveYouhadSurgery", comment: "")
+        donateQuestionLabel.text = "howManyTimesDoYouDonate".localiz
+        questionLabel1.text = "haveYouTravelledLast14Days".localiz
+        questionLabel2.text = "haveYouTakenAspirin".localiz
+        questionLabel3.text = "haveYouDonatedLast60Days".localiz
+        questionLabel4.text = "haveYouhadSurgery".localiz
         actionButtonAdd.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
         
         //        createDatePicker()
@@ -71,12 +98,13 @@ class PostViewController: UIViewController {
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
             // delete butten
-            let deleteButton = UIButton(frame: CGRect(x: 80, y: 650, width: 250, height: 50))
+            let deleteButton = UIButton(frame: CGRect(x: 80, y: 650, width: 250, height: 40))
             deleteButton.setTitle("Delete", for: .normal)
             deleteButton.setTitle(NSLocalizedString("delete", comment: ""), for: .normal)
+            
             self.navigationItem.rightBarButtonItem = deleteBarButton
             deleteButton.backgroundColor = .systemGray4
-            deleteButton.setTitleColor(UIColor.black, for: .normal)
+            deleteButton.setTitleColor(UIColor.red, for: .normal)
             deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
             self.view.addSubview(deleteButton)
             
@@ -91,33 +119,37 @@ class PostViewController: UIViewController {
         
     }
     @IBAction func switchActionOne(_ sender: Any) {
-        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
-            actionButtonAdd.isEnabled = false
-        } else {
-            actionButtonAdd.isEnabled = true
+         ReportForm()
+        if switchQuetion1.isOn {
+            answarLblQ1.text = "Yes".localiz
+        }else{
+            answarLblQ1.text = "No".localiz
         }
     }
-    
     @IBAction func switchAction2(_ sender: Any) {
-        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
-            actionButtonAdd.isEnabled = false
+        ReportForm()
+        if switchQuetion2.isOn {
+            answarLblQ2.text = "Yes".localiz
         } else {
-            actionButtonAdd.isEnabled = true
+            answarLblQ2.text = "No".localiz
         }
+        
     }
     @IBAction func switchAction3(_ sender: Any) {
-        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
-            actionButtonAdd.isEnabled = false
-        } else {
-            actionButtonAdd.isEnabled = true
+        ReportForm()
+        if switchQuetion3.isOn {
+            answarLblQ3.text = "Yes".localiz
+        }else{
+            answarLblQ3.text = "No".localiz
         }
     }
     
     @IBAction func switchAction4(_ sender: Any) {
-        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
-            actionButtonAdd.isEnabled = false
+        ReportForm()
+        if switchQuetion4.isOn{
+            answarLblQ4.text = "Yes".localiz
         } else {
-            actionButtonAdd.isEnabled = true
+            answarLblQ4.text = "No".localiz
         }
     }
     
@@ -248,4 +280,17 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     //        dateTextFieldPost.text = "\(datePicker.date)"
     //        self.view.endEditing(true)
     //    }
+    
+    func ReportForm(){
+        if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
+            actionButtonAdd.isEnabled = false
+        } else {
+            actionButtonAdd.isEnabled = true
+        }
+    }
+    func styleButton() {
+        Utilities.styleFielledButton(actionButtonAdd)
+        
+    }
+
 }

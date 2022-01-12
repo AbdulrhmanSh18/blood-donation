@@ -14,7 +14,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var notLabelDetails: UILabel!
     @IBOutlet weak var userNamelabel: UILabel!
     @IBOutlet weak var emailLabelDetails: UILabel!
-//    @IBOutlet weak var userImageView: UIImageView!{
+    @IBOutlet weak var phoneLabelDetails: UILabel!
+    //    @IBOutlet weak var userImageView: UIImageView!{
 //        didSet {
 //            userImageView.layer.borderColor = UIColor.systemRed.cgColor
 //            userImageView.layer.borderWidth = 0.1
@@ -28,19 +29,22 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var noteLbl: UILabel!
     @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var phoneLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateLbl.text = NSLocalizedString("date", comment: "")
-        locationLbl.text = NSLocalizedString("location", comment: "")
-        noteLbl.text = NSLocalizedString("note", comment: "")
-        emailLbl.text = NSLocalizedString("email", comment: "")
-        userNamelabel.text = NSLocalizedString("userName", comment: "")
+        dateLbl.text = "date".localiz
+        locationLbl.text = "location".localiz
+        noteLbl.text = "note".localiz
+        emailLbl.text = "email".localiz
+        phoneLbl.text = "phone".localiz
+        userNamelabel.text = "userName".localiz
         
         if let selectedPost = selectedPost {
             dateLabelDetails.text = selectedPost.date
             locationLabelDetails.text = selectedPost.location
             notLabelDetails.text = selectedPost.note
+            phoneLabelDetails.text = selectedPost.user.phone
             userNamelabel.text = selectedPost.user.userName
             emailLabelDetails.text = selectedPost.user.email
             

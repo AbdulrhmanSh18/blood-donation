@@ -68,7 +68,7 @@ class LandingViewController: UIViewController {
             }
         }
     }
-        
-    }
+}
+
 
 

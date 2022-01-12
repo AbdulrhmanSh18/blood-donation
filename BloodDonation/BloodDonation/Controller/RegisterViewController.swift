@@ -45,6 +45,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
         typeOfBloodTextField.inputView = pickerViewTOB
         pickerViewTOB.dataSource = self
         pickerViewTOB.delegate = self
@@ -85,6 +86,7 @@ class RegisterViewController: UIViewController {
                 if let error = error {
                     print("Registration Auth Error",error.localizedDescription)
                 }
+                
                 if let authResult = authResult {
                     let storageRef = Storage.storage().reference(withPath: "users/\(authResult.user.uid)")
                     let uploadMeta = StorageMetadata.init()

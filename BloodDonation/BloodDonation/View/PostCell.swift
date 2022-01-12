@@ -40,7 +40,6 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var userNamePost: UILabel!
     @IBOutlet weak var notePost: UILabel!
     @IBOutlet weak var typeOfBlood: UILabel!
-    @IBOutlet weak var userPhone: UILabel!
     @IBOutlet weak var userAgeLabel: UILabel!
     @IBOutlet weak var donateTimes: UILabel!
     
@@ -51,7 +50,6 @@ class PostCell: UITableViewCell {
         userNamePost.text = NSLocalizedString("userName", comment: "")
         notePost.text = NSLocalizedString("note", comment: "")
         typeOfBlood.text = NSLocalizedString("typeOfBlood", comment: "")
-        userPhone.text = NSLocalizedString("phone", comment: "")
         userAgeLabel.text = NSLocalizedString("age", comment: "")
         donateTimes.text = NSLocalizedString("", comment: "")
         
@@ -68,7 +66,6 @@ class PostCell: UITableViewCell {
         locationPost.text = post.location
         notePost.text = post.note
         userNamePost.text = "Doner/ \(post.user.userName)"
-        userPhone.text = post.user.phone
         typeOfBlood.text = post.user.typeOfBlood
         userAgeLabel.text = "age  \(post.user.age)"
         donateTimes.text = post.donate

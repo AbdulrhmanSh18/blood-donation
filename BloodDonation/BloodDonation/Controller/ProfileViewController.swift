@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        styleButton()
         userNameLbl.text = NSLocalizedString("userName", comment: "")
         phoneLbl.text = NSLocalizedString("phone", comment: "")
         emailLbl.text = NSLocalizedString("email", comment: "")
@@ -115,5 +115,8 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         }
     }
 }
+    func styleButton() {
+        Utilities.styleFielledButton(brofileButoonLogeOut)
+    }
 }
 
