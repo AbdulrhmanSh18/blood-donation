@@ -84,7 +84,10 @@ class RegisterViewController: UIViewController {
             Activity.showIndicator(parentView: self.view, childView: activityIndicator)
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let error = error {
-                    print("Registration Auth Error",error.localizedDescription)
+                    self.errorLabel.text = error.localizedDescription
+                    Activity.showIndicator(parentView: self.view, childView: self.activityIndicator)
+                    
+                    //print("Registration Auth Error",error.localizedDescription)
                 }
                 
                 if let authResult = authResult {
@@ -133,10 +136,10 @@ class RegisterViewController: UIViewController {
         }else {
             if passwordTextField.text != confrimPasswordTextField.text! {
                 errorLabel.text = "passwordNotCorrect".localiz
-                errorLabel.alpha = 1
+               
             }else {
                 errorLabel.text = "Empty".localiz
-                errorLabel.alpha = 1
+                
             }
         }
     }

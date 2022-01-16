@@ -44,11 +44,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleButton()
-        userNameLbl.text = NSLocalizedString("userName", comment: "")
-        phoneLbl.text = NSLocalizedString("phone", comment: "")
-        emailLbl.text = NSLocalizedString("email", comment: "")
-        ageLble.text = NSLocalizedString("age", comment: "")
-        typeBloodLbl.text = NSLocalizedString("typeOfBlood", comment: "")
+        userNameLbl.text = "userName".localiz
+        phoneLbl.text = "phone".localiz
+        emailLbl.text = "email".localiz
+        ageLble.text = "age".localiz
+        typeBloodLbl.text = "typeOfBlood".localiz
         brofileButoonLogeOut.setTitle(NSLocalizedString("logOut", comment: ""), for: .normal)
         
         getProfileData()

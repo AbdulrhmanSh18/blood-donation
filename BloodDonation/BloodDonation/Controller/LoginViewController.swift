@@ -9,6 +9,11 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var passwordVisbilty: UIButton!{
+        didSet{
+            passwordVisbilty.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        }
+    }
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var emailTextFieldLogin: UITextField!
@@ -23,13 +28,31 @@ class LoginViewController: UIViewController {
         setUpElements()
         //Localization for Login Page
         
-        loginPage.text = NSLocalizedString("login", comment: "")
-        emailLabel.text = NSLocalizedString("email", comment: "")
-        passwordLabel.text = NSLocalizedString("password", comment: "")
+        loginPage.text = "login".localiz
+        emailLabel.text = "email".localiz
+        passwordLabel.text = "password".localiz
         loginButton.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
+        
+        passwordTextFieldLogin.rightView = passwordVisbilty
+        passwordTextFieldLogin.rightViewMode = .always
 
     }
    
+    @IBAction func passwordVisbiltyAction(_ sender: UIButton) {
+        
+        passwordTextFieldLogin.isSecureTextEntry.toggle()
+                if passwordTextFieldLogin.isSecureTextEntry {
+                    if let image = UIImage(systemName: "eye.slash.fill") {
+                        sender.setImage(image, for: .normal)
+                        
+                    }
+                } else {
+                    if let image = UIImage(systemName: "eye.fill") {
+                        sender.setImage(image, for: .normal)
+                    }
+                }
+    }
+    
     @IBAction func handelingLoginButton(_ sender: Any) {
         let error = validateField()
         if error != nil {
@@ -73,9 +96,6 @@ class LoginViewController: UIViewController {
     }
     func setUpElements() {
         errorLbl.alpha = 0
-//        Utilities.styleTextField(emailTextFieldLogin)
-//        Utilities.styleTextField(passwordTextFieldLogin)
-//        Utilities.styleFielledButton(loginButton)
     }
 }
 

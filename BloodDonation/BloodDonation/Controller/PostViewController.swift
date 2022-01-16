@@ -98,12 +98,12 @@ class PostViewController: UIViewController {
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
             // delete butten
-            let deleteButton = UIButton(frame: CGRect(x: 80, y: 650, width: 250, height: 40))
+            let deleteButton = UIButton(frame: CGRect(x: 70, y: 650, width: 250, height: 40))
             deleteButton.setTitle("Delete", for: .normal)
             deleteButton.setTitle(NSLocalizedString("delete", comment: ""), for: .normal)
             
             self.navigationItem.rightBarButtonItem = deleteBarButton
-            deleteButton.backgroundColor = .systemGray4
+//            deleteButton.backgroundColor = .systemGray4
             deleteButton.setTitleColor(UIColor.red, for: .normal)
             deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
             self.view.addSubview(deleteButton)
@@ -233,54 +233,37 @@ class PostViewController: UIViewController {
         }
     }
 }
-extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @objc func chooseImage() {
-        self.showAlert()
-    }
-    private func showAlert() {
-        
-        let alert = UIAlertController(title: "Choose Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "camera".localiz, style: .default, handler: {(action: UIAlertAction) in
-            self.getImage(fromSourceType: .camera)
-        }))
-        alert.addAction(UIAlertAction(title: "photoAlbum".localiz, style: .default, handler: {(action: UIAlertAction) in
-            self.getImage(fromSourceType: .photoLibrary)
-        }))
-        alert.addAction(UIAlertAction(title: "cancel".localiz, style: .destructive, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    //get image from source type
-    private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
-        
-        //Check is source type available
-        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
-            
-            let imagePickerController = UIImagePickerController()
-            imagePickerController.delegate = self
-            imagePickerController.sourceType = sourceType
-            self.present(imagePickerController, animated: true, completion: nil)
-        }
-    }
-    //    func createDatePicker(){
-    //        let toolbar = UIToolbar()
-    //        toolbar.sizeToFit()
-    //
-    //        let doneButoon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-    //        toolbar.setItems([doneButoon], animated: true)
-    //        dateTextFieldPost.inputAccessoryView = toolbar
-    //        dateTextFieldPost.inputView = dateText
-    //        datePicker.datePickerMode = .date
-    //
-    //    }
-    //    @objc func donePressed(){
-    //    let formatter = DateFormatter()
-    //        formatter.dateStyle = .medium
-    ////        formatter.timeStyle = .none
-    //        dateTextFieldPost.text = formatter.string(from: datePicker.date)
-    //        dateTextFieldPost.text = "\(datePicker.date)"
-    //        self.view.endEditing(true)
-    //    }
+
     
+    // if  I want add post with image should be use this code ..
+extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    @objc func chooseImage() {
+//        self.showAlert()
+//    }
+//    private func showAlert() {
+//
+//        let alert = UIAlertController(title: "Choose Picture", message: "From where you want to pick this image?", preferredStyle: .actionSheet)
+//        alert.addAction(UIAlertAction(title: "camera".localiz, style: .default, handler: {(action: UIAlertAction) in
+//            self.getImage(fromSourceType: .camera)
+//        }))
+//        alert.addAction(UIAlertAction(title: "photoAlbum".localiz, style: .default, handler: {(action: UIAlertAction) in
+//            self.getImage(fromSourceType: .photoLibrary)
+//        }))
+//        alert.addAction(UIAlertAction(title: "cancel".localiz, style: .destructive, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+    //get image from source type
+//    private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
+//
+//        //Check is source type available
+//        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+//
+//            let imagePickerController = UIImagePickerController()
+//            imagePickerController.delegate = self
+//            imagePickerController.sourceType = sourceType
+//            self.present(imagePickerController, animated: true, completion: nil)
+//        }
+//    }
     func ReportForm(){
         if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
             actionButtonAdd.isEnabled = false

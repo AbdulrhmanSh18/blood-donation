@@ -6,25 +6,26 @@
 //
 
 import UIKit
-
+import UIKit
 class DetailsViewController: UIViewController {
     var selectedPost:Post?
+    var userImage = ""
     @IBOutlet weak var dateLabelDetails: UILabel!
     @IBOutlet weak var locationLabelDetails: UILabel!
     @IBOutlet weak var notLabelDetails: UILabel!
     @IBOutlet weak var userNamelabel: UILabel!
     @IBOutlet weak var emailLabelDetails: UILabel!
     @IBOutlet weak var phoneLabelDetails: UILabel!
-    //    @IBOutlet weak var userImageView: UIImageView!{
-//        didSet {
-//            userImageView.layer.borderColor = UIColor.systemRed.cgColor
-//            userImageView.layer.borderWidth = 0.1
-//            userImageView.layer.cornerRadius = userImageView.bounds.height / 0
-//            userImageView.layer.masksToBounds = true
-//            userImageView.isUserInteractionEnabled = true
-//        }
-//    }
     
+    @IBOutlet weak var imagenfo: UIImageView!{
+        didSet{
+            imagenfo.layer.borderColor = UIColor.systemRed.cgColor
+            imagenfo.layer.borderWidth = 1.0
+            imagenfo.layer.cornerRadius = imagenfo.bounds.height / 2
+            imagenfo.layer.masksToBounds = true
+            imagenfo.isUserInteractionEnabled = true
+    }
+}
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var noteLbl: UILabel!
@@ -47,7 +48,7 @@ class DetailsViewController: UIViewController {
             phoneLabelDetails.text = selectedPost.user.phone
             userNamelabel.text = selectedPost.user.userName
             emailLabelDetails.text = selectedPost.user.email
-            
+            imagenfo.loadImageUsingCache(with: selectedPost.user.imageUrl)
             
         }
     }

@@ -47,7 +47,7 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
         nameAppBloodDonation.text = NSLocalizedString("bloodDonation", comment: "Blood Donation")
         loginButton.setTitle(NSLocalizedString("login", comment: ""),
                              for: .normal)

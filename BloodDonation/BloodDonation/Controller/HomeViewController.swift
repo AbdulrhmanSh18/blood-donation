@@ -10,7 +10,6 @@ import Firebase
 class HomeViewController: UIViewController {
     var posts = [Post]()
     var selectedPost:Post?
-    var selectedPostImage:UIImage?
 
     @IBOutlet weak var searchBar: UISearchBar!
     var filterData : [Post]!
@@ -22,6 +21,7 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:))))
         searchBar.delegate = self
         
         filterData = posts
@@ -126,7 +126,6 @@ extension HomeViewController : UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! PostCell
-        selectedPostImage = cell.userPostImage.image
         selectedPost = posts[indexPath.row]
         if let currentUser = Auth.auth().currentUser,
            currentUser.uid == posts[indexPath.row].user.id {
@@ -152,7 +151,6 @@ extension HomeViewController : UISearchBarDelegate {
             }
         }
         self.postTabelViewHome.reloadData()
-        
     }
 }
 
