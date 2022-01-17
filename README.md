@@ -1,6 +1,6 @@
 # blood-donation
 ## Descreption
-- App for peaple that donate blood
+- App for people that donate blood and the more people can donate by add all informations like User name, age, blood type,location and date with phone number. You can see all those information if you used this app 
 
 ## Demo
 ![](lightmode.gif)
