@@ -21,4 +21,5 @@
 ![](ERD.png)
 
 ## WireFrame
-![](wireframe.png)
+
+<img width="746" alt="wireframe" src="https://user-images.githubusercontent.com/92254261/149770795-e86339f6-4c9f-4028-bdfe-d980a1db3c51.png">
