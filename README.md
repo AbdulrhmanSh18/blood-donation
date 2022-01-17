@@ -18,6 +18,6 @@
 - IQKeyboardManagerSwift
 
 ## ERD
-![](ERD)
+![](ERD.png)
 ## WireFrame
-![](wireframe)
+![](wireframe.png)
