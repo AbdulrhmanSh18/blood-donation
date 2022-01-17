@@ -97,16 +97,18 @@ class PostViewController: UIViewController {
             actionButtonAdd.setTitle(NSLocalizedString("update", comment: ""), for: .normal)
             let deleteBarButton = UIBarButtonItem(image:UIImage(systemName: "trash.fill"),style: .plain, target: self, action: #selector(handleDelete))
             self.navigationItem.rightBarButtonItem = deleteBarButton
-            // delete butten
-            let deleteButton = UIButton(frame: CGRect(x: 70, y: 650, width: 250, height: 40))
-            deleteButton.setTitle("Delete", for: .normal)
-            deleteButton.setTitle(NSLocalizedString("delete", comment: ""), for: .normal)
             
-            self.navigationItem.rightBarButtonItem = deleteBarButton
-//            deleteButton.backgroundColor = .systemGray4
-            deleteButton.setTitleColor(UIColor.red, for: .normal)
-            deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
-            self.view.addSubview(deleteButton)
+            // delete butten
+//            let deleteButton = UIButton(frame: CGRect(x: 70, y: 650, width: 250, height: 40))
+//            deleteButton.setTitle("Delete", for: .normal)
+//            deleteButton.setTitle(NSLocalizedString("delete", comment: ""), for: .normal)
+//
+//            self.navigationItem.rightBarButtonItem = deleteBarButton
+////            deleteButton.backgroundColor = .systemGray4
+//            deleteButton.setTitleColor(UIColor.red, for: .normal)
+//            deleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+//            self.view.addSubview(deleteButton)
+            
             
         }else {
             actionButtonAdd.setTitle("add", for: .normal)
@@ -133,7 +135,6 @@ class PostViewController: UIViewController {
         } else {
             answarLblQ2.text = "No".localiz
         }
-        
     }
     @IBAction func switchAction3(_ sender: Any) {
         ReportForm()
@@ -152,7 +153,6 @@ class PostViewController: UIViewController {
             answarLblQ4.text = "No".localiz
         }
     }
-    
     @objc func handleDelete (_ sender: UIBarButtonItem) {
         let ref = Firestore.firestore().collection("posts")
         if let selectedPost = selectedPost {
@@ -174,8 +174,9 @@ class PostViewController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func handlingAddQ(_ sender: Any) {
+        showMassege()
         let formatter = DateFormatter()
         let locale = Locale(identifier: "en_US_POSIX")
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -267,13 +268,36 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
     func ReportForm(){
         if switchQuetion1.isOn == true || switchQuetion2.isOn == true || switchQuetion3.isOn == true || switchQuetion4.isOn == true {
             actionButtonAdd.isEnabled = false
-        } else {
+            showAlart()
+            
+        }else {
             actionButtonAdd.isEnabled = true
         }
     }
+    func showMassege(){
+        let alert = UIAlertController(title: "bloodDonation".localiz, message: "thankYou".localiz, preferredStyle: UIAlertController.Style.alert)
+
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "ok".localiz, style: UIAlertAction.Style.default, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    func showAlart() {
+       
+//        alart massege
+        let alert = UIAlertController(title: "bloodDonation".localiz, message: "youCant".localiz, preferredStyle: UIAlertController.Style.alert)
+       
+                   // add an action (button)
+                   alert.addAction(UIAlertAction(title: "back".localiz, style: UIAlertAction.Style.default, handler: nil))
+       
+       
+                   // show the alert
+                   self.present(alert, animated: true, completion: nil)
+    }
+    
     func styleButton() {
         Utilities.styleFielledButton(actionButtonAdd)
         
     }
-
 }

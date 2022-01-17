@@ -163,7 +163,7 @@ extension RegisterViewController:UIImagePickerControllerDelegate, UINavigationCo
             self.getImage(from: .photoLibrary)
         }
         let dismissAction = UIAlertAction(title: "cancle".localiz, style: .destructive) { Action in
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cameraAction)
         alert.addAction(galeryAction)

@@ -12,19 +12,21 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var viewOfDonation: UIView!{
         didSet{
             viewOfDonation.layer.masksToBounds = true
-            viewOfDonation.layer.cornerRadius = 18
+            viewOfDonation.layer.cornerRadius = 8
+            viewOfDonation.layer.borderWidth = 1
+            viewOfDonation.layer.borderColor = UIColor.systemRed.cgColor
         }
     }
-    @IBOutlet weak var userPostImage: UIImageView!{
-        didSet {
-            userPostImage.layer.borderColor = UIColor.systemRed.cgColor
-            userPostImage.layer.borderWidth = 3.0
-            userPostImage.layer.cornerRadius = userPostImage.bounds.height / 2
-            userPostImage.layer.masksToBounds = true
-            userPostImage.isUserInteractionEnabled = true
-
-        }
-    }
+//    @IBOutlet weak var userPostImage: UIImageView!{
+//        didSet {
+//            userPostImage.layer.borderColor = UIColor.systemRed.cgColor
+//            userPostImage.layer.borderWidth = 3.0
+//            userPostImage.layer.cornerRadius = userPostImage.bounds.height / 2
+//            userPostImage.layer.masksToBounds = true
+//            userPostImage.isUserInteractionEnabled = true
+//
+//        }
+//    }
     @IBOutlet weak var infoImagePost: UIImageView!{
         didSet {
             infoImagePost.layer.borderColor = UIColor.systemRed.cgColor
@@ -65,7 +67,7 @@ class PostCell: UITableViewCell {
         datePost.text = post.date
         locationPost.text = post.location
         notePost.text = post.note
-        userNamePost.text = "Doner/ \(post.user.userName)"
+        userNamePost.text = post.user.userName
         typeOfBlood.text = post.user.typeOfBlood
         userAgeLabel.text = "age  \(post.user.age)"
         donateTimes.text = post.donate
@@ -73,7 +75,7 @@ class PostCell: UITableViewCell {
         return self
     }
     override func prepareForReuse() {
-        userPostImage.image = nil
+//        userPostImage.image = nil
         infoImagePost.image = nil
     }
 }

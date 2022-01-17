@@ -93,16 +93,28 @@ class ProfileViewController: UIViewController {
 }
     
     @IBAction func logOutHandeling(_ sender: Any) {
+        showAlart()
+
+//                // create the alert
+//                let alert = UIAlertController(title: "LogOut", message: "Would you like to logout from blood donation?", preferredStyle: UIAlertController.Style.alert)
+//
+//                // add the actions (buttons)
+//        alert.addAction(UIAlertAction(title: "sure", style: UIAlertAction.Style.destructive, handler: nil))
+//
+//                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+//
+//                // show the alert
+//                self.present(alert, animated: true, completion: nil)
     
-    do {
-        try Auth.auth().signOut()
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingNavigationController") as? UINavigationController {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-        }
-    }catch {
-        print("ERROR in signout", error.localizedDescription)
-    }
+//    do {
+//        try Auth.auth().signOut()
+//        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingNavigationController") as? UINavigationController {
+//            vc.modalPresentationStyle = .fullScreen
+//            self.present(vc, animated: true, completion: nil)
+//        }
+//    }catch {
+//        print("ERROR in signout", error.localizedDescription)
+//    }
 }
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
@@ -117,6 +129,28 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 }
     func styleButton() {
         Utilities.styleFielledButton(brofileButoonLogeOut)
+    }
+    func showAlart() {
+        // create the alert
+        let alert = UIAlertController(title: "LogOut", message: "Would you like to logout from blood donation?", preferredStyle: UIAlertController.Style.alert)
+
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "sure", style: UIAlertAction.Style.destructive, handler: { action in
+            do {
+                try Auth.auth().signOut()
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingNavigationController") as? UINavigationController {
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }catch {
+                print("ERROR in signout", error.localizedDescription)
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
